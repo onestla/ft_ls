@@ -6,39 +6,29 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:50:04 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/10 20:04:10 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/10 22:25:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h> 
-#include <dirent.h>
-#include <sys/stat.h>
 
-t_info	*lst_add(struct dirent *ptr, struct stat *info)
+t_info 	*ls_files(char *path, char *opt)
 {
-	t_info	*node;
-
-	if (!(node = malloc(sizeof(*node))))
-		return (NULL);
-	return (node);
-}
-
-
-int 	main(int ac, char **av)
-{
+	t_info			*info;
 	DIR				*ptr;
 	struct dirent	*ret;
-	struct stat		info;
+	struct stat		vstat;
 
-	if (!(lst = malloc(sizeof(*lst))))
-			return (0);
-	if (!(ptr = opendir(av[--ac])))
-		return (-1);
+	info = NULL;
+	if (!(ptr = opendir(path)))
+		ft_exit("FAUT GERER LES ERREURS ESPECES DE BRANLEUR !!!\n", 1);
 	while ((ret = readdir(ptr)))
 	{
-		stat(ret->d_name, &info);
-		printf("%s\n", ret->d_name);
+		if (ret->d_name[0]  == '.' && !ft_cisin(opt, 'a'))
+			continue;
+		stat(ret->d_name, &vstat);
+		info = ls_infoadd(info, ret->d_name, vstat);
 	}
-	return (0);
+	closedir(ptr);
+	return (info);
 }

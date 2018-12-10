@@ -6,11 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/12/10 19:57:18 by apeyret          ###   ########.fr       */
-=======
-/*   Updated: 2018/12/10 20:05:36 by glavigno         ###   ########.fr       */
->>>>>>> 3bf5530fb0eb14394c16c0b1b70540da50674a73
+/*   Updated: 2018/12/10 22:19:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +16,8 @@
 # include "libft.h"
 # include <dirent.h>
 # include <stdlib.h>
+# include <dirent.h>
+# include <sys/stat.h>
 
 typedef struct		s_path
 {
@@ -30,8 +28,12 @@ typedef struct		s_path
 typedef struct		s_info
 {
 	char			*name;
+	struct stat		stat;
 	struct s_info	*next;
 }					t_info;				
 
+t_info				*ls_files(char *path, char *opt);
 t_path				*ls_pathadd(t_path *path, char *folder);
+t_info				*ls_infoadd(t_info *info, char *name, struct stat stat);
+void				ls_router(char *opt, t_info *info);
 #endif

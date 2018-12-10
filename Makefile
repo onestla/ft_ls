@@ -6,14 +6,16 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2018/12/10 19:58:30 by apeyret          ###   ########.fr        #
+#    Updated: 2018/12/10 22:19:53 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls 
 
 SRC = main.c \
-	  ls_struct.c
+	  ls_struct.c \
+	  ls_files.c \
+	  ls_router.c
 
 CC = gcc
 

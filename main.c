@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/10 20:07:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/10 22:24:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 int		main(int ac, char **av)
 {
 	t_path		*path;
+	t_info		*info;
 	char		*opt;
 
 	path = NULL;
 	if (!(opt = ft_strnew(5)))
 		return (1);
 	av++;
-	path = ls_options(ac, av, path, opt);
+	if (!(path = ls_options(ac, av, path, opt)))
+		path = ls_pathadd(path, "./");
+	info = ls_files(path->path, opt);
+	ls_router(opt, info);
 	return (0);
 }

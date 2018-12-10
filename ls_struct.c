@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:16:27 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/10 20:06:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/10 22:01:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,23 @@ t_path	*ls_pathadd(t_path *path, char *folder)
 		tmp = tmp->next;
 	tmp->next = end;
 	return (path);
+}
+
+t_info	*ls_infoadd(t_info *info, char *name, struct stat vstat)
+{
+	t_info *end;
+	t_info *tmp;
+
+	if (!(end = malloc(sizeof(t_info))))
+		return (NULL);
+	end->name = ft_strdup(name);
+	end->stat = vstat;
+	end->next = NULL;
+	if (!info)
+		return (end);
+	tmp = info;
+	while (tmp->next)	
+		tmp = tmp->next;
+	tmp->next = end;
+	return (info);
 }
