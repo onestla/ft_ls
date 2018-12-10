@@ -6,17 +6,18 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2018/12/10 18:38:08 by apeyret          ###   ########.fr        #
+#    Updated: 2018/12/10 19:58:30 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls 
 
-SRC = main.c
+SRC = main.c \
+	  ls_struct.c
 
 CC = gcc
 
-CFLAGS = -I libft/ -Wall -Werror -Wextra 
+CFLAGS = -I . -I libft/ -Wall -Werror -Wextra 
 
 DEBUG= #-g3 -fsanitize=address
 

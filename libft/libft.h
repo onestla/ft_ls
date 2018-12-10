@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 13:41:32 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/10 12:33:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/10 19:39:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,5 @@ int					ft_intlen(int n);
 char				*ft_strndup(const char *s, int size);
 char				*ft_strlower(char *s);
 int					ft_cisin(char *s, char c);
+int					ft_printf(const char *s, ...);
 #endif
