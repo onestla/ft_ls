@@ -6,14 +6,14 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 18:44:50 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/10 12:34:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/10 18:33:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
+# include "libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>

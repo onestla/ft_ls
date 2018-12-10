@@ -6,13 +6,13 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 14:35:55 by apeyret           #+#    #+#              #
-#    Updated: 2018/12/07 15:39:11 by apeyret          ###   ########.fr        #
+#    Updated: 2018/12/10 18:31:55 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I .
+CFLAGS = -Wall -Wextra -Werror -I . -I ft_printf/
 SRC = ft_atoi.c \
 	ft_bzero.c \
 	ft_isalnum.c \
@@ -78,7 +78,17 @@ SRC = ft_atoi.c \
 	ft_intlen.c \
 	ft_strndup.c \
 	ft_strlower.c \
-	ft_cisin.c
+	ft_cisin.c \
+	ft_printf/ft_printf.c \
+	ft_printf/pf_base.c \
+	ft_printf/pf_ftoa.c \
+	ft_printf/pf_len.c \
+	ft_printf/pf_options.c \
+	ft_printf/pf_parsing.c \
+	ft_printf/pf_put.c \
+	ft_printf/pf_router.c \
+	ft_printf/pf_struct.c \
+	ft_printf/pf_utils.c
 
 OBJ = $(SRC:.c=.o) 
 
