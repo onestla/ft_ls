@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ls_print_a(t_info *info)
+void	ls_print(t_info *info)
 {
 	while (info)
 	{
@@ -35,8 +35,8 @@ void	ls_print_l(t_info *info)
 
 void	ls_router(char *opt, t_info *info)
 {
-	if (*opt == 'a')
-		ls_print_a(info);
-	if (*opt == 'l')
+	if (ft_cisin(opt, 'l'))
 		ls_print_l(info);
+	else
+		ls_print(info);
 }

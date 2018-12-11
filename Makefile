@@ -29,9 +29,9 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	@printf "\033[0;32m[ft_ls] Compilation [o.]\r"
+	@printf "\033[0;32m[ft_ls] Compilation [o.]\033[0;0m\r"
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "\033[0;32m[ft_ls] Compilation [.o]\r"
+	@printf "\033[0;32m[ft_ls] Compilation [.o]\033[0;0m\r"
 
 check:
 	-@cat $(SRC) | grep ft_strnew		| grep -v "if (\!(" 
@@ -42,19 +42,19 @@ check:
 	@norminette $(SRC)
 
 $(NAME): $(OBJ)
-	@printf "[ft_ls] Compilation [OK]\n"
+	@printf "\033[0;32m[ft_ls] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
 	@gcc $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
 
 clean:
 	@make clean -C libft/
 	@/bin/rm -f $(OBJ)
-	@printf "\033[0;31m[ft_ls] Deleted *.o\n"
+	@printf "\033[0;31m[ft_ls] Deleted *.o\033[0;0m\n"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@make nofclean -C libft/
-	@printf "\033[0;31D[ft_ls] Deleted ft_printf.a\n"
+	@printf "\033[0;31D[ft_ls] Deleted ft_ls\033[0;0m\n"
 
 re: fclean all
 
