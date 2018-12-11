@@ -78,7 +78,7 @@ char	*pf_putaddr(t_printf *lst, void *addr)
 
 	opt = pf_optnew();
 	opt.nb_zero = 2;
-	if (!(lst->var = utoa_base(lst, (unsigned long long)(addr), 16)))
+	if (!(lst->var = utoa_base(lst, (unsigned long)(addr), 16)))
 		return (NULL);
 	opt.size = ft_strlen(lst->var);
 	if (!lst->pre[1] && lst->pre[2] && lst->var[0] == '0')
