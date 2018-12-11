@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/11 16:38:26 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:23:54 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,19 @@ void	print_rights(t_info *info)
 void	print_rest(t_info *info)
 {
 	struct passwd	*pwd;
+	struct group	*grp;
+	char			*tm;
 
-	pwd = getpwuid(info->stat.st_uid);
 	ft_printf("%3ld", info->stat.st_nlink);
+	pwd = getpwuid(info->stat.st_uid);
 	ft_printf("%10s", pwd->pw_name);
+	grp = getgrgid(info->stat.st_gid);
+	ft_printf("%12s", grp->gr_name);
+	ft_printf("%10lld", info->stat.st_size);
+	tm = ctime(&info->stat.st_mtime);
+	tm[ft_strlen(tm) - 1] = '\0';
+	ft_putchar(' ');
+	ft_printf("%s", tm + 4);
+	ft_putchar(' ');
+	ft_printf("%-s\n", info->name);
 }

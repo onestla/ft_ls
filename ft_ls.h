@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/11 16:30:32 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:55:28 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <stdlib.h>
 # include <dirent.h>
 # include <sys/stat.h>
+# include <grp.h>
 # include <pwd.h>
+# include <time.h>
 
 typedef struct		s_path
 {

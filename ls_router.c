@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/11 16:25:42 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:56:53 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ls_print_l(t_info *info)
 		print_filetype(info);
 		print_rights(info);
 		print_rest(info);
-		ft_putchar('\n');
 		info = info->next;
 	}
 }
