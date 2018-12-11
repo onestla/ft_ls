@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:50:04 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/10 22:25:02 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/11 11:55:04 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_info 	*ls_files(char *path, char *opt)
 
 	info = NULL;
 	if (!(ptr = opendir(path)))
-		ft_exit("FAUT GERER LES ERREURS ESPECES DE BRANLEUR !!!\n", 1);
+		ft_exit("Failed to open stream: No such file or directory", 1);
 	while ((ret = readdir(ptr)))
 	{
 		if (ret->d_name[0]  == '.' && !ft_cisin(opt, 'a'))
