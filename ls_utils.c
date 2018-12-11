@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/11 17:23:54 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/11 18:48:29 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void	print_rest(t_info *info)
 	ft_putchar(' ');
 	ft_printf("%s", tm + 4);
 	ft_putchar(' ');
-	ft_printf("%-s\n", info->name);
+	ft_printf("%-s", info->name);
+	ft_printf("%d\n", info->stat.st_mtime);
 }

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/11 16:56:53 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/11 18:46:45 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ls_router(char *opt, t_info *info)
 {
 	if (ft_cisin(opt, 'l'))
 		ls_print_l(info);
+	if (ft_cisin(opt, 't'))
+		ls_print_l(sort_by_mtime(info));
 	else
 		ls_print(info);
 }
