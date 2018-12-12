@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/10 22:24:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 09:50:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int		main(int ac, char **av)
 	if (!(path = ls_options(ac, av, path, opt)))
 		path = ls_pathadd(path, "./");
 	info = ls_files(path->path, opt);
+	if (ft_cisin(opt, 't'))
+		info = sort_by_mtime(info);
 	ls_router(opt, info);
 	return (0);
 }
