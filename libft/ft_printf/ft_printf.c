@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 18:28:55 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/10 09:20:27 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/12 14:15:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,43 @@ int		ft_printf(const char *format, ...)
 	s = ret(lst, len);
 	write(1, s, len);
 	free(s);
+	pf_prdel(lst);
+	return (len);
+}
+
+int		ft_dprintf(int fd, const char *format, ...)
+{
+	t_printf	*lst;
+	va_list		ap;
+	int			len;
+	char		*s;
+
+	lst = parser(format);
+	if (!lst)
+		return (0);
+	va_start(ap, format);
+	pf_router(lst, ap);
+	len = lenall(lst);
+	s = ret(lst, len);
+	write(fd, s, len);
+	free(s);
+	pf_prdel(lst);
+	return (len);
+}
+
+int		ft_sprintf(char *restrict str, const char *format, ...)
+{
+	t_printf	*lst;
+	va_list		ap;
+	int			len;
+
+	lst = parser(format);
+	if (!lst)
+		return (0);
+	va_start(ap, format);
+	pf_router(lst, ap);
+	len = lenall(lst);
+	str = ret(lst, len);
 	pf_prdel(lst);
 	return (len);
 }
