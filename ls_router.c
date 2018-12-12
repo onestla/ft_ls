@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 11:50:56 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 20:04:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,85 @@
 
 void	ls_print(t_info *info)
 {
+	int		count;
+	int		len;
+	t_info	*tmp;
+
+	len = 0;
+	tmp = info;
+	while (tmp)
+	{
+		if (len < (int)ft_strlen(tmp->name))
+			len = ft_strlen(tmp->name);
+		tmp = tmp->next;
+	}
+	count = 0;
 	while (info)
 	{
-		ft_printf("%s\n", info->name);
+		if (count > 5)
+		{
+			ft_printf("\n");
+			count = -1;
+		}
+		else
+			ft_printf("%-*s", len, info->name);
+		count++;
 		info = info->next;
 	}
+	ft_printf("\n");
+}
+
+int		*ls_infolen(t_info *info)
+{
+	t_info	*tmp;
+	int		count;
+	int		*len;
+
+	count = 0;
+	len = (int*)malloc(sizeof(int) * 8);
+	tmp = info;
+	while (tmp->ligne[count + 1])
+	{
+		len[count] = 0;
+		while (tmp)
+		{
+			if ((int)ft_strlen(tmp->ligne[count]) > len[count])
+				len[count] = ft_strlen(tmp->ligne[count]);
+			tmp = tmp->next;
+		}
+		tmp = info;
+		count++;
+	}
+	len[count] = 0;
+	return (len);
 }
 
 void	ls_print_l(t_info *info)
 {
+	t_info	*tmp;
+	int		count;
+	int		*len;
+
+	count = 0;
+	tmp = info;
 	ft_printf("total %d\n", n_blocks(info));
+	while (tmp)
+	{
+		ls_sprint_rest(tmp);
+		tmp = tmp->next;
+	}
+	len = ls_infolen(info);
 	while (info)
 	{
 		print_filetype(info);
 		print_rights(info);
-		print_rest(info);
+		count = 0;
+		while (info->ligne[count + 1])
+		{
+			ft_printf("%*s", len[count] + 2, info->ligne[count]);
+			count++;
+		}
+		ft_printf(" %s", info->ligne[count]);
 		info = info->next;
 	}
 }

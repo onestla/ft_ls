@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:07:19 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/10 09:20:30 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/12 15:20:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ int			pf_passnb(const char *str, int *count)
 {
 	int tmp;
 
-	tmp = ft_atoi(&str[*count]);
-	if (!(str[*count] >= '0' && str[*count] <= '9'))
+	if (str[*count] == '*')
+		tmp = -1;
+	else
+		tmp = ft_atoi(&str[*count]);
+	if (!(str[*count] >= '0' && str[*count] <= '9') && str[*count] != '*')
 	{
 		(*count)--;
 		return (tmp);
 	}
-	while (str[*count + 1] >= '0' && str[*count + 1] <= '9')
+	while ((str[*count + 1] >= '0' && str[*count + 1] <= '9'))
 		(*count)++;
 	return (tmp);
 }
@@ -42,7 +45,7 @@ t_printf	*analyze(const char *str, int *count)
 		return (NULL);
 	while (str[*count])
 	{
-		if (str[*count] >= '1' && str[*count] <= '9')
+		if ((str[*count] >= '1' && str[*count] <= '9') || str[*count] == '*')
 			lst->pre[0] = pf_passnb(str, count);
 		else if (str[*count] == '.')
 			pf_point(lst, str, count);

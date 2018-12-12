@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 18:28:55 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 14:15:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 19:43:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ int		ft_dprintf(int fd, const char *format, ...)
 	return (len);
 }
 
-int		ft_sprintf(char *restrict str, const char *format, ...)
+char	*ft_Sprintf(const char *format, ...)
 {
 	t_printf	*lst;
+	char		*s;
 	va_list		ap;
 	int			len;
 
@@ -100,7 +101,7 @@ int		ft_sprintf(char *restrict str, const char *format, ...)
 	va_start(ap, format);
 	pf_router(lst, ap);
 	len = lenall(lst);
-	str = ret(lst, len);
+	s = ret(lst, len);
 	pf_prdel(lst);
-	return (len);
+	return (s);
 }

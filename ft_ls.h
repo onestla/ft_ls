@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 14:26:07 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/12 19:12:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ typedef struct		s_info
 	char			*name;
 	unsigned char	type;
 	struct stat		stat;
+	
+	char			*ligne[8];
+	int				len[8];
+
 	struct s_info	*next;
 	struct s_info	*prev;
 }					t_info;
@@ -46,7 +50,7 @@ t_info				*ls_infoadd(t_info *info, char *name, struct stat stat, unsigned char 
 void				ls_router(char *opt, t_info *info);
 void				print_filetype(t_info *info);
 void				print_rights(t_info *info);
-void				print_rest(t_info *info);
+void				ls_sprint_rest(t_info *info);
 t_info				*ls_sort_mtime(t_info *info);
 t_info				*ls_sort_name(t_info *info);
 int					n_blocks(t_info *info);

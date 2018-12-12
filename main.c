@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 13:00:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 20:57:52 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 	return (path);
 }
 
-void	ls_ls(char *path, char *opt)
+void	ls_ls(char *path, char *opt, int count)
 {
 	t_info		*info;
 	char		*tmp;
 
-	tmp = ft_strjoin(path, "/");
-	if (ft_cisin(opt, 'R') && ft_strcmp(path, "."))
+	tmp = path;
+	if (count)
 		ft_printf("%s:\n", path);
-	if (!(info = ls_files(tmp, opt)))// && !ft_cisin(opt, 'R'))
+	if (!(info = ls_files(tmp, opt)))
 		return ;
 	if (ft_cisin(opt, 't'))
 		info = ls_sort_mtime(info);
@@ -63,7 +63,7 @@ void	ls_ls(char *path, char *opt)
 		if (info->type == 4)
 			ft_printf("\n");
 		if (info->type == 4)
-			ls_ls(ft_strjoin(tmp, info->name),  opt);
+			ls_ls(ft_Sprintf("%s/%s", tmp, info->name),  opt, count + 1);
 		info = info->next;
 	}
 }
@@ -72,8 +72,10 @@ int		main(int ac, char **av)
 {
 	t_path		*path;
 	char		*opt;
+	int			count;
 
 	path = NULL;
+	count = 0;
 	if (!(opt = ft_strnew(5)))
 		return (1);
 	av++;
@@ -81,7 +83,7 @@ int		main(int ac, char **av)
 		path = ls_pathadd(path, ".");
 	while (path)
 	{
-		ls_ls(path->path, opt);
+		ls_ls(path->path, opt, count++);
 		path = path->next;
 	}
 	return (0);

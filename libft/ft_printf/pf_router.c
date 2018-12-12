@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 18:18:00 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/09 18:24:59 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/12 15:16:11 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ void	pf_router_f(t_printf *lst, va_list ap)
 		lst->opt = pf_len_f(lst, pf_optnew());
 }
 
+void	pf_wildcard(t_printf *lst, va_list ap)
+{
+	if (lst->pre[0] == -1)
+		lst->pre[0] = va_arg(ap, int);
+	if (lst->pre[1] == -1)
+		lst->pre[1] = va_arg(ap, int);
+}
+
 void	pf_router(t_printf *lst, va_list ap)
 {
 	t_printf	*tmp;
@@ -71,19 +79,18 @@ void	pf_router(t_printf *lst, va_list ap)
 	tmp = lst;
 	while (tmp)
 	{
+		pf_wildcard(lst, ap);
 		if (!tmp->needconv && tmp->var)
 			tmp->len = ft_strlen(tmp->var);
-		else if (tmp->type == 'f' || tmp->type == 'F')
+		else if (ft_cisin("fF", tmp->type))
 			pf_router_f(tmp, ap);
 		else if (tmp->type == 's')
 			pf_putstr(tmp, va_arg(ap, char*));
 		else if (tmp->type == 'c')
 			pf_putchar(tmp, va_arg(ap, int));
-		else if (tmp->type == 'd' || tmp->type == 'i' || tmp->type == 'D')
+		else if (ft_cisin("diD", tmp->type))
 			pf_router_d(tmp, ap);
-		else if (tmp->type == 'u' || tmp->type == 'o' || tmp->type == 'x' ||
-				tmp->type == 'X' || tmp->type == 'b' || tmp->type == 'U'
-				|| tmp->type == 'O')
+		else if (ft_cisin("uoxXbUu", tmp->type))
 			pf_router_u(tmp, ap);
 		else if (tmp->type == 'p')
 			pf_putaddr(tmp, va_arg(ap, void*));
