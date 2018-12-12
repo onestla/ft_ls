@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 17:31:40 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 10:19:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 12:29:11 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		simple_cmp(int a, int b, char *s1, char *s2)
 {
-	if ((a - a % 60) ==  (b - b % 60))
-		return (-1 * ft_strcmp(s1, s2));
+	if (a == b)
+		return (ft_strcmp(s1, s2) * -1);
 	return (a - b);
 }
 
@@ -44,8 +44,8 @@ t_info		*ls_sort_mtime(t_info *info)
 		tmp = info->next;
 		while (tmp)
 		{
-			if (simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) < 0) // cmp fn to insert 
-				swap_nodes(info, tmp); // create fn to swap nodes' content 
+			if (simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) < 0)
+				swap_nodes(info, tmp); 
 			tmp = tmp->next;
 		}
 		info = info->next;
@@ -65,8 +65,8 @@ t_info		*ls_sort_name(t_info *info)
 		tmp = info->next;
 		while (tmp)
 		{
-			if (ft_strcmp(info->name, tmp->name) > 0) // cmp fn to insert 
-				swap_nodes(info, tmp); // create fn to swap nodes' content 
+			if (ft_strcmp(info->name, tmp->name) > 0)  
+				swap_nodes(info, tmp);
 			tmp = tmp->next;
 		}
 		info = info->next;

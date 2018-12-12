@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 11:50:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 14:11:34 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,18 @@ void	print_rest(t_info *info)
 	ft_printf("%10s", pwd->pw_name);
 	grp = getgrgid(info->stat.st_gid);
 	ft_printf("%12s", grp->gr_name);
-	ft_printf("%10lld", info->stat.st_size);
+	if (S_ISCHR(info->stat.st_mode) || S_ISBLK(info->stat.st_mode))
+	{
+		ft_printf("%5u,", major(info->stat.st_rdev));
+		ft_printf("%5u", minor(info->stat.st_rdev));
+	}
+	else
+		ft_printf("%10lld", info->stat.st_size);
 	tm = ctime(&info->stat.st_mtime);
 	tm[ft_strlen(tm) - 1] = '\0';
 	ft_putchar(' ');
-	ft_printf("%s", tm + 4);
+	ft_printf("%.12s", tm + 4);
 	ft_putchar(' ');
-	ft_printf("%-s\n", info->name);
+	ft_printf("%-15s\n", info->name);
+
 }

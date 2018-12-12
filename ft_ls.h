@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 12:07:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 12:50:41 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <dirent.h>
 # include <sys/stat.h>
+# include <sys/types.h>
 # include <grp.h>
 # include <pwd.h>
 # include <time.h>
