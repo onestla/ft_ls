@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 09:50:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 12:26:31 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,34 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 	return (path);
 }
 
+void	ls_ls(char *path, char *opt)
+{
+	t_info		*info;
+	char		*tmp;
+
+	tmp = ft_strjoin(path, "/");
+	if (!(info = ls_files(tmp, opt)))
+		return ;
+	if (ft_cisin(opt, 'R') && ft_strcmp(path, "."))
+		ft_printf("%s:\n", path);
+	if (ft_cisin(opt, 't'))
+		info = ls_sort_mtime(info);
+	else
+		info = ls_sort_name(info);
+	ls_router(opt, info);
+	while (info && ft_cisin(opt, 'R'))
+	{
+		if (info->type == 4)
+			ft_printf("\n");
+		if (info->type == 4)
+			ls_ls(ft_strjoin(tmp, info->name),  opt);
+		info = info->next;
+	}
+}
+
 int		main(int ac, char **av)
 {
 	t_path		*path;
-	t_info		*info;
 	char		*opt;
 
 	path = NULL;
@@ -54,10 +78,11 @@ int		main(int ac, char **av)
 		return (1);
 	av++;
 	if (!(path = ls_options(ac, av, path, opt)))
-		path = ls_pathadd(path, "./");
-	info = ls_files(path->path, opt);
-	if (ft_cisin(opt, 't'))
-		info = sort_by_mtime(info);
-	ls_router(opt, info);
+		path = ls_pathadd(path, ".");
+	while (path)
+	{
+		ls_ls(path->path, opt);
+		path = path->next;
+	}
 	return (0);
 }

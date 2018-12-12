@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2018/12/11 18:21:36 by glavigno         ###   ########.fr        #
+#    Updated: 2018/12/12 09:56:53 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,13 @@ SRC = main.c \
 	  ls_files.c \
 	  ls_router.c \
 	  ls_utils.c \
-	  ls_lst_sort.c
+	  ls_sort.c
 
 CC = gcc
 
 CFLAGS = -I . -I libft/ -Wall -Werror -Wextra 
 
-DEBUG= #-g3 -fsanitize=address
+DEBUG= -g3 -fsanitize=address
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 17:31:40 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 09:22:52 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/12 10:19:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	swap_nodes(t_info *a, t_info *b)
 	b->stat = struct_tmp;
 }
 
-t_info		*sort_by_mtime(t_info *info)
+t_info		*ls_sort_mtime(t_info *info)
 {
 	t_info	*begin;
 	t_info	*tmp;
@@ -45,6 +45,27 @@ t_info		*sort_by_mtime(t_info *info)
 		while (tmp)
 		{
 			if (simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) < 0) // cmp fn to insert 
+				swap_nodes(info, tmp); // create fn to swap nodes' content 
+			tmp = tmp->next;
+		}
+		info = info->next;
+	}
+	return (begin);
+}
+
+t_info		*ls_sort_name(t_info *info)
+{
+	t_info	*begin;
+	t_info	*tmp;
+
+	tmp = NULL;
+	begin = info;
+	while (info)
+	{
+		tmp = info->next;
+		while (tmp)
+		{
+			if (ft_strcmp(info->name, tmp->name) > 0) // cmp fn to insert 
 				swap_nodes(info, tmp); // create fn to swap nodes' content 
 			tmp = tmp->next;
 		}

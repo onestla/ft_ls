@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:16:27 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/10 22:01:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 11:44:11 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ t_path	*ls_pathadd(t_path *path, char *folder)
 	if (!path)
 		return (end);
 	tmp = path;
-	while (tmp->next)	
+	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = end;
 	return (path);
 }
 
-t_info	*ls_infoadd(t_info *info, char *name, struct stat vstat)
+t_info	*ls_infoadd(t_info *info, char *name, struct stat vstat, unsigned char type)
 {
 	t_info *end;
 	t_info *tmp;
@@ -38,6 +38,7 @@ t_info	*ls_infoadd(t_info *info, char *name, struct stat vstat)
 	if (!(end = malloc(sizeof(t_info))))
 		return (NULL);
 	end->name = ft_strdup(name);
+	end->type = type;
 	end->stat = vstat;
 	end->next = NULL;
 	if (!info)
