@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 12:07:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 12:51:04 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct		s_info
 	unsigned char	type;
 	struct stat		stat;
 	struct s_info	*next;
+	struct s_info	*prev;
 }					t_info;
 
 t_info				*ls_files(char *path, char *opt);

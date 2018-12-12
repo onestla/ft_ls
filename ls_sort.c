@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 17:31:40 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 10:19:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 13:00:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ int		simple_cmp(int a, int b, char *s1, char *s2)
 
 void	swap_nodes(t_info *a, t_info *b)
 {
-	char		*str_tmp;
-	struct stat	struct_tmp;
+	t_info *c;
 
-	str_tmp = a->name;
-	a->name = b->name;
-	b->name = str_tmp;
-	struct_tmp = a->stat;
-	a->stat = b->stat;
-	b->stat = struct_tmp;
+	c = a->next;
+	a->next = b->next;
+	b->next = c;
+	c = a->prev;
+	a->prev = b->prev;
+	b->prev = c;
 }
 
 t_info		*ls_sort_mtime(t_info *info)
