@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 12:26:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/12 13:00:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	ls_ls(char *path, char *opt)
 	char		*tmp;
 
 	tmp = ft_strjoin(path, "/");
-	if (!(info = ls_files(tmp, opt)))
-		return ;
 	if (ft_cisin(opt, 'R') && ft_strcmp(path, "."))
 		ft_printf("%s:\n", path);
+	if (!(info = ls_files(tmp, opt)))// && !ft_cisin(opt, 'R'))
+		return ;
 	if (ft_cisin(opt, 't'))
 		info = ls_sort_mtime(info);
 	else
