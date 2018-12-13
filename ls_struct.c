@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:16:27 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 17:32:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 18:50:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_path	*ls_pathadd(t_path *path, char *folder)
 
 	if (!(end = malloc(sizeof(t_path))))
 		return (NULL);
+	end->error = ls_fcheck(folder);
 	end->path = ft_strdup(folder);
 	end->next = NULL;
 	if (!path)
@@ -69,4 +70,17 @@ void	ls_infoswap(t_info *a, t_info *b)
 	b->name = tmpn;
 	b->type	= tmpt;
 	b->stat = tmps;
+}
+
+int		ls_pathlen(t_path *path)
+{
+	int count;
+
+	count = 0;
+	while (path)
+	{
+		count++;	
+		path = path->next;
+	}
+	return (count);
 }

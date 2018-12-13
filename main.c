@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 17:48:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 19:30:04 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 	return (path);
 }
 
-void	ls_ls(char *path, char *opt, int count)
+void	ls_ls(char *path, int type, char *opt, int count)
 {
 	t_info		*info;
 	char		*tmp;
@@ -51,8 +51,7 @@ void	ls_ls(char *path, char *opt, int count)
 	tmp = path;
 	if (count)
 		ft_printf("%s:\n", path);
-	if (!(info = ls_files(tmp, opt)))
-		return ;
+	info = ls_frouter(path, opt, type);
 	info = ls_sortrouter(info, opt);
 	ls_router(opt, info);
 	while (info && ft_cisin(opt, 'R'))
@@ -60,7 +59,7 @@ void	ls_ls(char *path, char *opt, int count)
 		if (info->type == 4 && ft_strcmp(".", info->name) && ft_strcmp("..", info->name))
 		{
 			ft_printf("\n");
-			ls_ls(ft_Sprintf("%s/%s", tmp, info->name),  opt, count + 1);
+			ls_ls(ft_Sprintf("%s/%s", tmp, info->name), 1,  opt, count + 1);
 		}
 		info = info->next;
 	}
@@ -79,9 +78,11 @@ int		main(int ac, char **av)
 	av++;
 	if (!(path = ls_options(ac, av, path, opt)))
 		path = ls_pathadd(path, ".");
+	count = ls_pathlen(path) - 1;
 	while (path)
 	{
-		ls_ls(path->path, opt, count++);
+		if (path->error != -1)
+			ls_ls(path->path, path->error,  opt, count++);
 		path = path->next;
 	}
 	return (0);

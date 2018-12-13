@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 17:48:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 19:29:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 typedef struct		s_path
 {
 	char			*path;
+	int				error;
 	struct s_path	*next;
 }					t_path;
 
@@ -44,7 +45,6 @@ typedef struct		s_info
 	struct s_info	*prev;
 }					t_info;
 
-t_info				*ls_files(char *path, char *opt);
 t_path				*ls_pathadd(t_path *path, char *folder);
 t_info				*ls_infoadd(t_info *info, char *name, struct stat stat, unsigned char type);
 void				ls_router(char *opt, t_info *info);
@@ -57,5 +57,8 @@ t_info				*ls_sort_size(t_info *info, int rev);
 int					n_blocks(t_info *info);
 void				ls_infoswap(t_info *a, t_info *b);
 t_info				*ls_sortrouter(t_info *info, char *opt);
+int					ls_pathlen(t_path *path);
+int					ls_fcheck(char *path);
+t_info				*ls_frouter(char *path, char *opt, int type);
 
 #endif

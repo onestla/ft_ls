@@ -6,13 +6,13 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:50:04 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/13 17:25:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 19:29:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_info 	*ls_files(char *path, char *opt)
+t_info 	*ls_folder(char *path, char *opt)
 {
 	t_info			*info;
 	char			*cpath;
@@ -39,4 +39,48 @@ t_info 	*ls_files(char *path, char *opt)
 	}
 	closedir(ptr);
 	return (info);
+}
+
+t_info		*ls_file(char *file)
+{
+	struct stat	vstat;
+	t_info		*info;
+
+	info = NULL;
+	stat(file, &vstat);
+	info = ls_infoadd(info, file, vstat, 0);
+	return (info);
+}
+
+int		ls_isfolder(char *path)
+{
+	char *error;
+
+	if (!opendir(path))
+	{
+		error = strerror(errno);
+		if (ft_strcmp("Not a direcory", error))
+			return (0);
+		ft_dprintf(2, "ls: %s: %s\n", path, error);
+		return (-1);
+	}
+	return (1);
+}
+
+int		ls_fcheck(char *path)
+{
+	int ret;
+
+	ret = 0;
+	if ((ret = ls_isfolder(path)) != 0)
+		return (ret);
+	return (2);
+}
+
+t_info		*ls_frouter(char *path, char *opt, int type)
+{
+	if (type == 1)
+		return (ls_folder(path, opt));
+	else
+		return (ls_file(path));
 }
