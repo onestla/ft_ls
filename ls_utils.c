@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/13 19:06:49 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/13 19:12:15 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,16 @@ void	ls_sprint_rest(t_info *info, char *path)
 
 	count = 0;
 	tm = NULL;
-	info->ligne[count++] = ft_Sprintf("%ld", info->stat.st_nlink);
-	info->ligne[count++] = ft_Sprintf("%s", getpwuid(info->stat.st_uid)->pw_name);
-	info->ligne[count++] = ft_Sprintf("%s", getgrgid(info->stat.st_gid)->gr_name);
+	info->ligne[count++] = ft_Sprintf(" %ld", info->stat.st_nlink);
+	info->ligne[count++] = ft_Sprintf(" %s", getpwuid(info->stat.st_uid)->pw_name);
+	info->ligne[count++] = ft_Sprintf(" %s", getgrgid(info->stat.st_gid)->gr_name);
 	if (S_ISCHR(info->stat.st_mode) || S_ISBLK(info->stat.st_mode))
 	{
-		info->ligne[count++] = ft_Sprintf("%u,", major(info->stat.st_rdev));
-		info->ligne[count++] = ft_Sprintf("%u", minor(info->stat.st_rdev));
+		info->ligne[count++] = ft_Sprintf("%u, %3u", major(info->stat.st_rdev), minor(info->stat.st_rdev));
 	}
 	else
 	{
-		info->ligne[count++] = ft_Sprintf(" ");
-		info->ligne[count++] = ft_Sprintf("%lld", info->stat.st_size);
+		info->ligne[count++] = ft_Sprintf(" %lld", info->stat.st_size);
 	}
 	tm = ctime(&info->stat.st_mtime);
 	tm[ft_strlen(tm) - 1] = '\0';

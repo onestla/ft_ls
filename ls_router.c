@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 17:27:33 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/13 19:12:36 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ls_print(t_info *info)
 			count = -1;
 		}
 		else
-			ft_printf("%-*s", len, info->name);
+			ft_printf("%-*s", len + 1, info->name);
 		count++;
 		info = info->next;
 	}
@@ -89,7 +89,7 @@ void	ls_print_l(t_info *info, char *path)
 		count = 0;
 		while (info->ligne[count + 1])
 		{
-			ft_printf("%*s", len[count] + 2, info->ligne[count]);
+			ft_printf("%*s", len[count] + 1, info->ligne[count]);
 			count++;
 		}
 		ft_printf(" %s", info->ligne[count]);
