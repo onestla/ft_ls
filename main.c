@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 16:30:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 17:10:05 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 			counta = 1;
 			while (av[count][counta])
 			{
-				if (!ft_cisin("lRart", av[count][counta]))
+				if (!ft_cisin("ARlart", av[count][counta]))
 				{
 					ft_printf("ls: illegal option -- %c\n", av[count][counta]);
-					ft_printf("usage: ls [-Ralrt] [file ...]\n");
+					ft_printf("usage: ls [-ARalrt] [file ...]\n");
 					exit(1);
 				}
 				if (!ft_cisin(opt, av[count][counta]))
