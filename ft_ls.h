@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 19:12:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 16:00:32 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void				ls_router(char *opt, t_info *info);
 void				print_filetype(t_info *info);
 void				print_rights(t_info *info);
 void				ls_sprint_rest(t_info *info);
-t_info				*ls_sort_mtime(t_info *info);
-t_info				*ls_sort_name(t_info *info);
+t_info				*ls_sort_mtime(t_info *info, int rev);
+t_info				*ls_sort_name(t_info *info, int rev);
 int					n_blocks(t_info *info);
 
 #endif

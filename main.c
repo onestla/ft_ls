@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 20:57:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 16:00:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	ls_ls(char *path, char *opt, int count)
 	if (!(info = ls_files(tmp, opt)))
 		return ;
 	if (ft_cisin(opt, 't'))
-		info = ls_sort_mtime(info);
+		info = ls_sort_mtime(info, ft_cisin(opt, 'r'));
 	else
-		info = ls_sort_name(info);
+		info = ls_sort_name(info, ft_cisin(opt, 'r'));
 	ls_router(opt, info);
 	while (info && ft_cisin(opt, 'R'))
 	{

@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 17:31:40 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 17:55:26 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 15:59:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	swap_nodes(t_info *a, t_info *b)
 	b->stat = tmps;
 }
 
-t_info		*ls_sort_mtime(t_info *info)
+t_info		*ls_sort_mtime(t_info *info, int rev)
 {
 	t_info	*begin;
 	t_info	*tmp;
@@ -50,7 +50,8 @@ t_info		*ls_sort_mtime(t_info *info)
 		tmp = info->next;
 		while (tmp)
 		{
-			if (simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) < 0)
+			if ((simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) < 0 && !rev) || 
+					(simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) && rev))
 				swap_nodes(info, tmp); 
 			tmp = tmp->next;
 		}
@@ -59,7 +60,7 @@ t_info		*ls_sort_mtime(t_info *info)
 	return (begin);
 }
 
-t_info		*ls_sort_name(t_info *info)
+t_info		*ls_sort_name(t_info *info, int rev)
 {
 	t_info	*begin;
 	t_info	*tmp;
@@ -71,7 +72,7 @@ t_info		*ls_sort_name(t_info *info)
 		tmp = info->next;
 		while (tmp)
 		{
-			if (ft_strcmp(info->name, tmp->name) > 0)  
+			if ((ft_strcmp(info->name, tmp->name) > 0 && !rev) || (ft_strcmp(info->name, tmp->name) < 0 && rev))  
 				swap_nodes(info, tmp);
 			tmp = tmp->next;
 		}
