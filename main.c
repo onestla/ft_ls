@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 16:00:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 16:30:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ void	ls_ls(char *path, char *opt, int count)
 	ls_router(opt, info);
 	while (info && ft_cisin(opt, 'R'))
 	{
-		if (info->type == 4)
+		if (info->type == 4 && ft_strcmp(".", info->name) && ft_strcmp("..", info->name))
+		{
 			ft_printf("\n");
-		if (info->type == 4)
 			ls_ls(ft_Sprintf("%s/%s", tmp, info->name),  opt, count + 1);
+		}
 		info = info->next;
 	}
 }
