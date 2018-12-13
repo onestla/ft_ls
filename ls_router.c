@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 19:12:36 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/13 21:18:24 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ void	ls_print(t_info *info)
 	count = 0;
 	while (info)
 	{
-		if (count > 5)
+		if (count > 4)
 		{
 			ft_printf("\n");
-			count = -1;
+			count = 0;
 		}
-		else
-			ft_printf("%-*s", len + 1, info->name);
+		ft_printf("%-*s", len + 1, info->name);
 		count++;
 		info = info->next;
 	}
@@ -67,7 +66,7 @@ int		*ls_infolen(t_info *info)
 	return (len);
 }
 
-void	ls_print_l(t_info *info, char *path)
+void	ls_print_l(t_info *info, char *path, int type)
 {
 	t_info	*tmp;
 	int		count;
@@ -75,7 +74,8 @@ void	ls_print_l(t_info *info, char *path)
 
 	count = 0;
 	tmp = info;
-	ft_printf("total %d\n", n_blocks(info));
+	if (type != 2)
+		ft_printf("total %d\n", n_blocks(info));
 	while (tmp)
 	{
 		ls_sprint_rest(tmp, path);
@@ -98,10 +98,10 @@ void	ls_print_l(t_info *info, char *path)
 	}
 }
 
-void	ls_router(char *opt, t_info *info, char *path)
+void	ls_router(char *opt, t_info *info, char *path, int type)
 {
 	if (ft_cisin(opt, 'l'))
-		ls_print_l(info, path);
+		ls_print_l(info, path, type);
 	else
 		ls_print(info);
 }

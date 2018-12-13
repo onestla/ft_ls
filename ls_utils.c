@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/13 19:12:15 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/13 20:45:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	print_rights(t_info *info, char *path)
 	ft_putchar((info->stat.st_mode & S_IXOTH) ? 'x' : '-');
 	if ((len = listxattr(ft_Sprintf("%s/%s", path, info->name), buf, sizeof(buf) - 1, 0)) > 0)
 		ft_putchar('@');
+	else
+		ft_putchar(' ');
 }
 
 int		ls_lnlink(t_info *info)
@@ -78,25 +80,22 @@ void	ls_sprint_rest(t_info *info, char *path)
 
 	count = 0;
 	tm = NULL;
-	info->ligne[count++] = ft_Sprintf(" %ld", info->stat.st_nlink);
+	info->ligne[count++] = ft_Sprintf("%ld", info->stat.st_nlink);
 	info->ligne[count++] = ft_Sprintf(" %s", getpwuid(info->stat.st_uid)->pw_name);
 	info->ligne[count++] = ft_Sprintf(" %s", getgrgid(info->stat.st_gid)->gr_name);
 	if (S_ISCHR(info->stat.st_mode) || S_ISBLK(info->stat.st_mode))
-	{
 		info->ligne[count++] = ft_Sprintf("%u, %3u", major(info->stat.st_rdev), minor(info->stat.st_rdev));
-	}
 	else
-	{
 		info->ligne[count++] = ft_Sprintf(" %lld", info->stat.st_size);
-	}
 	tm = ctime(&info->stat.st_mtime);
 	tm[ft_strlen(tm) - 1] = '\0';
-	info->ligne[count++] = ft_Sprintf("%.12s %s", tm + 4, info->name);
 	if (S_ISLNK(info->stat.st_mode))
 	{
 		if ((len = readlink(ft_Sprintf("%s/%s", path, info->name), buf, sizeof(buf) - 1)) != -1)
 			buf[len] = '\0';
-		info->ligne[count++] = ft_Sprintf("-> %s", buf);
+		info->ligne[count++] = ft_Sprintf("%.12s %s -> %s", tm + 4, info->name, buf);
 	}
+	else
+		info->ligne[count++] = ft_Sprintf("%.12s %s", tm + 4, info->name);
 	info->ligne[count] = NULL;
 }

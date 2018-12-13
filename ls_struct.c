@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:16:27 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 19:42:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 20:37:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ t_path	*ls_pathadd(t_path *path, char *folder)
 	if (!path)
 		return (end);
 	tmp = path;
-	while (tmp->next)
+	while (tmp->next && (tmp->next)->error == 2)
 		tmp = tmp->next;
+	if (end->error != 2)
+		while (tmp->next)
+			tmp = tmp->next;
+	end->next = tmp->next;
 	tmp->next = end;
 	return (path);
 }
