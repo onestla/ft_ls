@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:50:04 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 20:40:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 16:36:00 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_info 	*ls_files(char *path, char *opt)
 		if (ret->d_name[0]  == '.' && !ft_cisin(opt, 'a'))
 			continue;
 		cpath = ft_Sprintf("%s/%s", path, ret->d_name);
-		stat(cpath, &vstat);
+		lstat(cpath, &vstat);
 		info = ls_infoadd(info, ret->d_name, vstat, ret->d_type);
 		ft_strdel(&cpath);
 	}

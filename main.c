@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 16:00:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 17:03:37 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ls_ls(char *path, char *opt, int count)
 		info = ls_sort_mtime(info, ft_cisin(opt, 'r'));
 	else
 		info = ls_sort_name(info, ft_cisin(opt, 'r'));
-	ls_router(opt, info);
+	ls_router(opt, info, path);
 	while (info && ft_cisin(opt, 'R'))
 	{
 		if (info->type == 4)

@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 20:08:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 19:06:49 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,22 @@ void	print_filetype(t_info *info)
 	S_ISREG(info->stat.st_mode) ? ft_putchar('-') : 0;
 }
 
-void	print_rights(t_info *info)
+void	print_rights(t_info *info, char *path)
 {
-	ft_printf("%c", (info->stat.st_mode & S_IRUSR) ? 'r' : '-');
-	ft_printf("%c", (info->stat.st_mode & S_IWUSR) ? 'w' : '-');
-	ft_printf("%c", (info->stat.st_mode & S_IXUSR) ? 'x' : '-');
-	ft_printf("%c", (info->stat.st_mode & S_IRGRP) ? 'r' : '-'); 
-	ft_printf("%c", (info->stat.st_mode & S_IWGRP) ? 'w' : '-');
-	ft_printf("%c", (info->stat.st_mode & S_IXGRP) ? 'x' : '-');
-	ft_printf("%c", (info->stat.st_mode & S_IROTH) ? 'r' : '-');
-	ft_printf("%c", (info->stat.st_mode & S_IWOTH) ? 'w' : '-');
-	ft_printf("%c", (info->stat.st_mode & S_IXOTH) ? 'x' : '-');
+	char			buf[1024];
+	ssize_t			len;
+
+	ft_putchar((info->stat.st_mode & S_IRUSR) ? 'r' : '-');
+	ft_putchar((info->stat.st_mode & S_IWUSR) ? 'w' : '-');
+	ft_putchar((info->stat.st_mode & S_IXUSR) ? 'x' : '-');
+	ft_putchar((info->stat.st_mode & S_IRGRP) ? 'r' : '-'); 
+	ft_putchar((info->stat.st_mode & S_IWGRP) ? 'w' : '-');
+	ft_putchar((info->stat.st_mode & S_IXGRP) ? 'x' : '-');
+	ft_putchar((info->stat.st_mode & S_IROTH) ? 'r' : '-');
+	ft_putchar((info->stat.st_mode & S_IWOTH) ? 'w' : '-');
+	ft_putchar((info->stat.st_mode & S_IXOTH) ? 'x' : '-');
+	if ((len = listxattr(ft_Sprintf("%s/%s", path, info->name), buf, sizeof(buf) - 1, 0)) > 0)
+		ft_putchar('@');
 }
 
 int		ls_lnlink(t_info *info)
@@ -64,10 +69,12 @@ int		ls_lnlink(t_info *info)
 }
 
 
-void	ls_sprint_rest(t_info *info)
+void	ls_sprint_rest(t_info *info, char *path)
 {
 	char			*tm;
 	int				count;
+	char			buf[1024];
+	ssize_t			len;
 
 	count = 0;
 	tm = NULL;
@@ -86,6 +93,12 @@ void	ls_sprint_rest(t_info *info)
 	}
 	tm = ctime(&info->stat.st_mtime);
 	tm[ft_strlen(tm) - 1] = '\0';
-	info->ligne[count++] = ft_Sprintf("%.12s %s\n", tm + 4, info->name);
+	info->ligne[count++] = ft_Sprintf("%.12s %s", tm + 4, info->name);
+	if (S_ISLNK(info->stat.st_mode))
+	{
+		if ((len = readlink(ft_Sprintf("%s/%s", path, info->name), buf, sizeof(buf) - 1)) != -1)
+			buf[len] = '\0';
+		info->ligne[count++] = ft_Sprintf("-> %s", buf);
+	}
 	info->ligne[count] = NULL;
 }

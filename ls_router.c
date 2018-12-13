@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 20:04:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 17:27:33 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		*ls_infolen(t_info *info)
 	return (len);
 }
 
-void	ls_print_l(t_info *info)
+void	ls_print_l(t_info *info, char *path)
 {
 	t_info	*tmp;
 	int		count;
@@ -78,14 +78,14 @@ void	ls_print_l(t_info *info)
 	ft_printf("total %d\n", n_blocks(info));
 	while (tmp)
 	{
-		ls_sprint_rest(tmp);
+		ls_sprint_rest(tmp, path);
 		tmp = tmp->next;
 	}
 	len = ls_infolen(info);
 	while (info)
 	{
 		print_filetype(info);
-		print_rights(info);
+		print_rights(info, path);
 		count = 0;
 		while (info->ligne[count + 1])
 		{
@@ -93,14 +93,15 @@ void	ls_print_l(t_info *info)
 			count++;
 		}
 		ft_printf(" %s", info->ligne[count]);
+		ft_printf("\n");
 		info = info->next;
 	}
 }
 
-void	ls_router(char *opt, t_info *info)
+void	ls_router(char *opt, t_info *info, char *path)
 {
 	if (ft_cisin(opt, 'l'))
-		ls_print_l(info);
+		ls_print_l(info, path);
 	else
 		ls_print(info);
 }
