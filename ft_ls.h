@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 19:29:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 19:38:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define FT_LS_H
 
 # include "libft.h"
-# include <dirent.h>
 # include <stdlib.h>
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <sys/xattr.h>
 # include <grp.h>
 # include <pwd.h>
 # include <time.h>
@@ -38,7 +38,7 @@ typedef struct		s_info
 	unsigned char	type;
 	struct stat		stat;
 	
-	char			*ligne[8];
+	char			*ligne[9];
 	int				len[8];
 
 	struct s_info	*next;
@@ -47,10 +47,10 @@ typedef struct		s_info
 
 t_path				*ls_pathadd(t_path *path, char *folder);
 t_info				*ls_infoadd(t_info *info, char *name, struct stat stat, unsigned char type);
-void				ls_router(char *opt, t_info *info);
+void				ls_router(char *opt, t_info *info, char *path);
 void				print_filetype(t_info *info);
-void				print_rights(t_info *info);
-void				ls_sprint_rest(t_info *info);
+void				print_rights(t_info *info, char *path);
+void				ls_sprint_rest(t_info *info, char *path);
 t_info				*ls_sort_mtime(t_info *info, int rev);
 t_info				*ls_sort_name(t_info *info, int rev);
 t_info				*ls_sort_size(t_info *info, int rev);

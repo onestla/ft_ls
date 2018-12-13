@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 19:30:04 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 19:39:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ void	ls_ls(char *path, int type, char *opt, int count)
 	tmp = path;
 	if (count)
 		ft_printf("%s:\n", path);
-	info = ls_frouter(path, opt, type);
-	info = ls_sortrouter(info, opt);
-	ls_router(opt, info);
+	if (!(info = ls_files(tmp, opt)))
+		return ;
+	if (ft_cisin(opt, 't'))
+		info = ls_sort_mtime(info, ft_cisin(opt, 'r'));
+	else if (!ft_cisin(opt, 'f'))
+		info = ls_sort_name(info, ft_cisin(opt, 'r'));
+	ls_router(opt, info, path);
 	while (info && ft_cisin(opt, 'R'))
 	{
 		if (info->type == 4 && ft_strcmp(".", info->name) && ft_strcmp("..", info->name))
