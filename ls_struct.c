@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:16:27 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 12:51:48 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/13 17:32:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,23 @@ t_info	*ls_infoadd(t_info *info, char *name, struct stat vstat, unsigned char ty
 	end->prev = tmp;
 	tmp->next = end;
 	return (info);
+}
+
+void	ls_infoswap(t_info *a, t_info *b)
+{
+	struct stat tmps;
+	char		*tmpn;
+	unsigned char tmpt;
+
+	tmpn = a->name;
+	tmpt = a->type;
+	tmps = a->stat;
+
+	a->name = b->name;
+	a->type = b->type;
+	a->stat = b->stat;
+
+	b->name = tmpn;
+	b->type	= tmpt;
+	b->stat = tmps;
 }
