@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 18:04:37 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/14 19:29:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ls_print_l(t_info *info, char *path, int type, char *opt)
 	count = 0;
 	tmp = info;
 	if (type != 2)
-		ft_printf("total %d\n", n_blocks(info));
+		ft_printf("total %d\n", ls_n_blocks(info));
 	while (tmp)
 	{
 		ls_sprint_rest(tmp, path, opt);
@@ -88,8 +88,8 @@ void	ls_print_l(t_info *info, char *path, int type, char *opt)
 	len = ls_infolen(info);
 	while (info)
 	{
-		print_filetype(info);
-		print_rights(info, path);
+		ls_print_filetype(info);
+		ls_print_rights(info, path);
 		count = 0;
 		while (info->ligne[count + 1])
 		{
