@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 21:18:24 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/14 08:53:27 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		*ls_infolen(t_info *info)
 	return (len);
 }
 
-void	ls_print_l(t_info *info, char *path, int type)
+void	ls_print_l(t_info *info, char *path, int type, char *opt)
 {
 	t_info	*tmp;
 	int		count;
@@ -78,7 +78,7 @@ void	ls_print_l(t_info *info, char *path, int type)
 		ft_printf("total %d\n", n_blocks(info));
 	while (tmp)
 	{
-		ls_sprint_rest(tmp, path);
+		ls_sprint_rest(tmp, path, opt);
 		tmp = tmp->next;
 	}
 	len = ls_infolen(info);
@@ -100,8 +100,8 @@ void	ls_print_l(t_info *info, char *path, int type)
 
 void	ls_router(char *opt, t_info *info, char *path, int type)
 {
-	if (ft_cisin(opt, 'l'))
-		ls_print_l(info, path, type);
+	if (ft_cisin(opt, 'g') || ft_cisin(opt, 'l'))
+		ls_print_l(info, path, type, opt);
 	else
 		ls_print(info);
 }
