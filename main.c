@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 16:44:08 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 18:09:38 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,28 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 	return (path);
 }
 
+void	ls_infodel(t_info *info)
+{
+	int		count;
+
+	if (!info)
+		return ;
+	count = 0;
+	ft_strdel(&(info->name));
+	while (info->ligne[count])
+	{
+		ft_strdel(&(info->ligne[count]));
+		count++;
+	}
+	free(info);
+	info = NULL;
+}
+
 void	ls_ls(char *path, int type, char *opt, int count)
 {
 	t_info		*info;
-	char		*tmp;
+	t_info		*itmp;
 
-	tmp = path;
 	if (count && type != 2)
 		ft_printf("%s:\n", path);
 	info = ls_frouter(path, opt, type);
@@ -59,9 +75,18 @@ void	ls_ls(char *path, int type, char *opt, int count)
 		if (info->type == 4 && ft_strcmp(".", info->name) && ft_strcmp("..", info->name))
 		{
 			ft_printf("\n");
-			ls_ls(ft_Sprintf("%s/%s", tmp, info->name), 1,  opt, count + 1);
+			ls_ls(ft_Sprintf("%s/%s", path, info->name), 1,  opt, count + 1);
 		}
+		itmp = info;
 		info = info->next;
+		ls_infodel(itmp);
+	}
+	ft_strdel(&path);
+	while (info)
+	{
+		itmp = info;
+		info = info->next;
+		ls_infodel(itmp);
 	}
 }
 
@@ -80,7 +105,6 @@ int		main(int ac, char **av)
 	if (!(path = ls_options(ac, av, path, opt)))
 		path = ls_pathadd(path, ".");
 	path = ls_psortrouter(path, opt);
-	count = ls_pathlen(path) - 1;
 	tmp = path;
 	while (tmp)
 	{
@@ -88,11 +112,16 @@ int		main(int ac, char **av)
 			ls_ls(tmp->path, tmp->error,  opt, count++);
 		tmp = tmp->next;
 	}
+	count = ls_pathlen(path) - 1;
 	tmp = path;
 	while (tmp)
 	{
 		if (tmp->error == 1)
+		{
+			if (count != 0)
+				ft_printf("\n");
 			ls_ls(tmp->path, tmp->error,  opt, count++);
+		}
 		tmp = tmp->next;
 	}
 	return (0);

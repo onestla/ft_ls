@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 15:46:07 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 18:04:37 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	ls_print_l(t_info *info, char *path, int type, char *opt)
 
 void	ls_router(char *opt, t_info *info, char *path, int type)
 {
+	if (!info)
+		return ;
 	if (ft_cisin(opt, 'g') || ft_cisin(opt, 'l'))
 		ls_print_l(info, path, type, opt);
 	else

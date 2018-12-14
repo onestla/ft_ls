@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2018/12/14 16:24:06 by apeyret          ###   ########.fr        #
+#    Updated: 2018/12/14 18:14:06 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CC = gcc
 
 CFLAGS = -I . -I libft/ -Wall -Werror -Wextra 
 
-DEBUG= -g3 -fsanitize=address
+DEBUG= #-g3 -fsanitize=address
 
 OBJ = $(SRC:.c=.o)
 
