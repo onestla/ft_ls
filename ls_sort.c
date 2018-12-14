@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 17:31:40 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 09:07:21 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 09:24:49 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ t_info		*ls_sort_atime(t_info *info, int rev)
 		{
 			if ((simple_cmp(info->stat.st_atime, tmp->stat.st_atime, info->name, tmp->name) < 0 && !rev) || 
 					(simple_cmp(info->stat.st_atime, tmp->stat.st_atime, info->name, tmp->name) > 0 && rev))
+				ls_infoswap(info, tmp); 
+			tmp = tmp->next;
+		}
+		info = info->next;
+	}
+	return (begin);
+}
+
+t_info		*ls_sort_ctime(t_info *info, int rev)
+{
+	t_info	*begin;
+	t_info	*tmp;
+
+	tmp = NULL;
+	begin = info;
+	while (info)
+	{
+		tmp = info->next;
+		while (tmp)
+		{
+			if ((simple_cmp(info->stat.st_ctime, tmp->stat.st_ctime, info->name, tmp->name) < 0 && !rev) || 
+					(simple_cmp(info->stat.st_ctime, tmp->stat.st_ctime, info->name, tmp->name) > 0 && rev))
 				ls_infoswap(info, tmp); 
 			tmp = tmp->next;
 		}
@@ -112,7 +134,9 @@ t_info		*ls_sortrouter(t_info *info, char *opt)
 		return (ls_sort_size(info, ft_cisin(opt, 'r')));
 	else if (ft_cisin(opt, 't'))
 	{
-		if (ft_cisin(opt, 'u'))
+		if (ft_cisin(opt, 'c'))
+			return (ls_sort_ctime(info, ft_cisin(opt, 'r')));
+		else if (ft_cisin(opt, 'u'))
 			return (ls_sort_atime(info, ft_cisin(opt, 'r')));
 		return (ls_sort_mtime(info, ft_cisin(opt, 'r')));
 	}

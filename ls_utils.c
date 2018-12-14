@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 09:07:33 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 09:32:27 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int		ls_lnlink(t_info *info)
 	return (ft_intlen(len));
 }
 
-
 void	ls_sprint_rest(t_info *info, char *path, char *opt)
 {
 	char			*tm;
@@ -88,7 +87,12 @@ void	ls_sprint_rest(t_info *info, char *path, char *opt)
 		info->ligne[count++] = ft_Sprintf("%u, %3u", major(info->stat.st_rdev), minor(info->stat.st_rdev));
 	else
 		info->ligne[count++] = ft_Sprintf(" %lld", info->stat.st_size);
-	tm = (ft_cisin(opt, 'u')) ? ctime(&info->stat.st_atime) : ctime(&info->stat.st_mtime);
+	if (ft_cisin(opt, 'u'))
+		tm = ctime(&info->stat.st_atime);
+	else if (ft_cisin(opt, 'c'))
+		tm = ctime(&info->stat.st_ctime);
+	else	
+		tm = ctime(&info->stat.st_mtime);
 	tm[ft_strlen(tm) - 1] = '\0';
 	if (S_ISLNK(info->stat.st_mode))
 	{

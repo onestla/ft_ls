@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 09:10:03 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 09:27:03 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 			counta = 1;
 			while (av[count][counta])
 			{
-				if (!ft_cisin("ARSafglrtu", av[count][counta]))
+				if (!ft_cisin("ARSacfglrtu", av[count][counta]))
 				{
 					ft_printf("ls: illegal option -- %c\n", av[count][counta]);
-					ft_printf("usage: ls [-ARSafglrtu] [file ...]\n");
+					ft_printf("usage: ls [-ARSacfglrtu] [file ...]\n");
 					exit(1);
 				}
 				if (!ft_cisin(opt, av[count][counta]))
@@ -73,7 +73,7 @@ int		main(int ac, char **av)
 
 	path = NULL;
 	count = 0;
-	if (!(opt = ft_strnew(10)))
+	if (!(opt = ft_strnew(11)))
 		return (1);
 	av++;
 	if (!(path = ls_options(ac, av, path, opt)))
