@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 11:20:26 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:30:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ t_info				*ls_sortrouter(t_info *info, char *opt);
 int					ls_pathlen(t_path *path);
 int					ls_fcheck(char *path);
 t_info				*ls_frouter(char *path, char *opt, int type);
+t_path				*ls_psortrouter(t_path *path, char *opt);
+void				ls_pathswap(t_path *a, t_path *b);
+int					simple_cmp(int a, int b, char *s1, char *s2);
 
 #endif
