@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 19:24:19 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/14 20:12:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,10 @@ void	ls_sprint_rest(t_info *info, char *path, char *opt)
 
 	count = 0;
 	info->ligne[count++] = ft_Sprintf("%ld", info->stat.st_nlink);
-	if (!ft_cisin(opt, 'g'))
+	if (!ft_cisin(opt, 'g') && getpwuid(info->stat.st_uid))
 		info->ligne[count++] = ft_Sprintf("%s", getpwuid(info->stat.st_uid)->pw_name);
+	else if (!ft_cisin(opt, 'g'))
+		info->ligne[count++] = ft_Sprintf("%d", info->stat.st_uid);
 	info->ligne[count++] = ft_Sprintf(" %s", getgrgid(info->stat.st_gid)->gr_name);
 	if (S_ISCHR(info->stat.st_mode) || S_ISBLK(info->stat.st_mode))
 		info->ligne[count++] = ft_Sprintf("%u, %3u", major(info->stat.st_rdev), minor(info->stat.st_rdev));
