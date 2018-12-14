@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:50:04 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 16:39:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/14 18:25:50 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_info 	*ls_folder(char *path, char *opt)
 		ft_strdel(&cpath);
 	}
 	closedir(ptr);
+	if (ret)
+		free(ret);
 	return (info);
 }
 
@@ -54,16 +56,22 @@ t_info		*ls_file(char *file)
 
 int		ls_isfolder(char *path)
 {
-	char *error;
+	char	*error;
+	DIR		*ptr;
 
-	if (!opendir(path))
+	if (!(ptr = opendir(path)))
 	{
 		error = strerror(errno);
 		if (!ft_strcmp("Not a directory", error))
+		{
+			ft_strdel(&error);
 			return (0);
+		}
 		ft_dprintf(2, "ls: %s: %s\n", path, error);
+		ft_strdel(&error);
 		return (-1);
 	}
+	closedir(ptr);
 	return (1);
 }
 

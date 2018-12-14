@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 18:09:38 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/14 18:33:02 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,20 @@ void	ls_ls(char *path, int type, char *opt, int count)
 	}
 }
 
+void	ls_pathdel(t_path *path)
+{
+	t_path *tmp;
+
+	while (path)
+	{
+		if (path->error == -1)
+			ft_strdel(&(path->path));
+		tmp = path;
+		path = path->next;
+		free(tmp);
+	}
+}
+
 int		main(int ac, char **av)
 {
 	t_path		*path;
@@ -124,5 +138,7 @@ int		main(int ac, char **av)
 		}
 		tmp = tmp->next;
 	}
+	ls_pathdel(path);
+	ft_strdel(&opt);
 	return (0);
 }
