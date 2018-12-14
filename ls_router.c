@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 08:53:27 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 11:46:42 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		*ls_infolen(t_info *info)
 	int		*len;
 
 	count = 0;
-	len = (int*)malloc(sizeof(int) * 8);
+	len = (int*)malloc(sizeof(int) * 9);
 	tmp = info;
 	while (tmp->ligne[count + 1])
 	{

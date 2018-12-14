@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 11:25:29 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 11:43:15 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,32 @@ int		ls_lnlink(t_info *info)
 	return (ft_intlen(len));
 }
 
-void	ls_sprint_rest(t_info *info, char *path, char *opt)
+void	ls_print_date(t_info *info, char *opt, int *count)
 {
 	time_t			tme;
 	char			*tm;
+
+	tme = time(NULL);
+	if (ft_cisin(opt, 'u'))
+		tm = ctime(&info->stat.st_atime);
+	else if (ft_cisin(opt, 'c'))
+		tm = ctime(&info->stat.st_ctime);
+	else	
+		tm = ctime(&info->stat.st_mtime);
+	tm[ft_strlen(tm) - 1] = '\0';
+	if (tme - info->stat.st_mtime > SIX_MONTHS)
+		info->ligne[(*count)++] = ft_Sprintf("%.6s  %.4s", tm + 4, tm + 20);
+	else
+		info->ligne[(*count)++] = ft_Sprintf("%.12s", tm + 4);
+}
+
+void	ls_sprint_rest(t_info *info, char *path, char *opt)
+{
 	int				count;
 	char			buf[1024];
 	ssize_t			len;
 
 	count = 0;
-	tm = NULL;
 	info->ligne[count++] = ft_Sprintf("%ld", info->stat.st_nlink);
 	if (!ft_cisin(opt, 'g'))
 		info->ligne[count++] = ft_Sprintf(" %s", getpwuid(info->stat.st_uid)->pw_name);
@@ -88,26 +104,14 @@ void	ls_sprint_rest(t_info *info, char *path, char *opt)
 		info->ligne[count++] = ft_Sprintf("%u, %3u", major(info->stat.st_rdev), minor(info->stat.st_rdev));
 	else
 		info->ligne[count++] = ft_Sprintf(" %lld", info->stat.st_size);
-	if (ft_cisin(opt, 'u'))
-		tm = ctime(&info->stat.st_atime);
-	else if (ft_cisin(opt, 'c'))
-		tm = ctime(&info->stat.st_ctime);
-	else	
-		tm = ctime(&info->stat.st_mtime);
-	tm[ft_strlen(tm) - 1] = '\0';
-	tme = time(NULL);
+	ls_print_date(info, opt, &count);
 	if (S_ISLNK(info->stat.st_mode))
 	{
 		if ((len = readlink(ft_Sprintf("%s/%s", path, info->name), buf, sizeof(buf) - 1)) != -1)
 			buf[len] = '\0';
-		info->ligne[count++] = ft_Sprintf("%.12s %s -> %s", tm + 4, info->name, buf);
+		info->ligne[count++] = ft_Sprintf("%s -> %s", info->name, buf);
 	}
-	else
-	{
-		if (tme - info->stat.st_mtime > SIX_MONTHS)
-			info->ligne[count++] = ft_Sprintf("%.6s  %.4s %s", tm + 4, tm + 20, info->name);
-		else
-			info->ligne[count++] = ft_Sprintf("%.12s %s", tm + 4, info->name);
-	}
+	else 
+		info->ligne[count++] = ft_Sprintf("%s", info->name);
 	info->ligne[count] = NULL;
 }
