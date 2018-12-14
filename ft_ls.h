@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 17:40:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/14 19:26:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ typedef struct		s_info
 t_path				*ls_pathadd(t_path *path, char *folder);
 t_info				*ls_infoadd(t_info *info, char *name, struct stat stat, unsigned char type);
 void				ls_router(char *opt, t_info *info, char *path, int type);
-void				print_filetype(t_info *info);
-void				print_rights(t_info *info, char *path);
+void				ls_print_filetype(t_info *info);
+void				ls_print_rights(t_info *info, char *path);
 void				ls_sprint_rest(t_info *info, char *path, char *opt);
 t_info				*ls_sort_mtime(t_info *info, int rev);
 t_info				*ls_sort_name(t_info *info, int rev);
 t_info				*ls_sort_size(t_info *info, int rev);
-int					n_blocks(t_info *info);
+int					ls_n_blocks(t_info *info);
 void				ls_infoswap(t_info *a, t_info *b);
 t_info				*ls_sortrouter(t_info *info, char *opt);
 int					ls_pathlen(t_path *path);
@@ -64,6 +64,9 @@ int					ls_fcheck(char *path);
 t_info				*ls_frouter(char *path, char *opt, int type);
 t_path				*ls_psortrouter(t_path *path, char *opt);
 void				ls_pathswap(t_path *a, t_path *b);
-int					simple_cmp(int a, int b, char *s1, char *s2);
+int					ls_simple_cmp(int a, int b, char *s1, char *s2);
+t_info				*ls_infodel(t_info *info);
+void				ls_infosdel(t_info *info);
+void				ls_pathdel(t_path *path);
 
 #endif

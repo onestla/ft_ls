@@ -6,13 +6,13 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 17:31:40 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 09:24:49 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 19:28:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		simple_cmp(int a, int b, char *s1, char *s2)
+int		ls_simple_cmp(int a, int b, char *s1, char *s2)
 {
 	if (a == b)
 		return (ft_strcmp(s1, s2) * -1);
@@ -31,8 +31,8 @@ t_info		*ls_sort_atime(t_info *info, int rev)
 		tmp = info->next;
 		while (tmp)
 		{
-			if ((simple_cmp(info->stat.st_atime, tmp->stat.st_atime, info->name, tmp->name) < 0 && !rev) || 
-					(simple_cmp(info->stat.st_atime, tmp->stat.st_atime, info->name, tmp->name) > 0 && rev))
+			if ((ls_simple_cmp(info->stat.st_atime, tmp->stat.st_atime, info->name, tmp->name) < 0 && !rev) || 
+					(ls_simple_cmp(info->stat.st_atime, tmp->stat.st_atime, info->name, tmp->name) > 0 && rev))
 				ls_infoswap(info, tmp); 
 			tmp = tmp->next;
 		}
@@ -53,8 +53,8 @@ t_info		*ls_sort_ctime(t_info *info, int rev)
 		tmp = info->next;
 		while (tmp)
 		{
-			if ((simple_cmp(info->stat.st_ctime, tmp->stat.st_ctime, info->name, tmp->name) < 0 && !rev) || 
-					(simple_cmp(info->stat.st_ctime, tmp->stat.st_ctime, info->name, tmp->name) > 0 && rev))
+			if ((ls_simple_cmp(info->stat.st_ctime, tmp->stat.st_ctime, info->name, tmp->name) < 0 && !rev) || 
+					(ls_simple_cmp(info->stat.st_ctime, tmp->stat.st_ctime, info->name, tmp->name) > 0 && rev))
 				ls_infoswap(info, tmp); 
 			tmp = tmp->next;
 		}
@@ -75,8 +75,8 @@ t_info		*ls_sort_mtime(t_info *info, int rev)
 		tmp = info->next;
 		while (tmp)
 		{
-			if ((simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) < 0 && !rev) || 
-					(simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) > 0 && rev))
+			if ((ls_simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) < 0 && !rev) || 
+					(ls_simple_cmp(info->stat.st_mtime, tmp->stat.st_mtime, info->name, tmp->name) > 0 && rev))
 				ls_infoswap(info, tmp); 
 			tmp = tmp->next;
 		}
@@ -118,8 +118,8 @@ t_info		*ls_sort_size(t_info *info, int rev)
 		tmp = info->next;
 		while (tmp)
 		{
-			if ((simple_cmp(info->stat.st_size, tmp->stat.st_size, info->name, tmp->name) < 0 && !rev) || 
-					(simple_cmp(info->stat.st_size, tmp->stat.st_size, info->name, tmp->name) > 0 && rev))
+			if ((ls_simple_cmp(info->stat.st_size, tmp->stat.st_size, info->name, tmp->name) < 0 && !rev) || 
+					(ls_simple_cmp(info->stat.st_size, tmp->stat.st_size, info->name, tmp->name) > 0 && rev))
 				ls_infoswap(info, tmp); 
 			tmp = tmp->next;
 		}

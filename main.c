@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 18:33:02 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 19:24:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,9 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 	return (path);
 }
 
-void	ls_infodel(t_info *info)
-{
-	int		count;
-
-	if (!info)
-		return ;
-	count = 0;
-	ft_strdel(&(info->name));
-	while (info->ligne[count])
-	{
-		ft_strdel(&(info->ligne[count]));
-		count++;
-	}
-	free(info);
-	info = NULL;
-}
-
 void	ls_ls(char *path, int type, char *opt, int count)
 {
 	t_info		*info;
-	t_info		*itmp;
 
 	if (count && type != 2)
 		ft_printf("%s:\n", path);
@@ -77,31 +59,9 @@ void	ls_ls(char *path, int type, char *opt, int count)
 			ft_printf("\n");
 			ls_ls(ft_Sprintf("%s/%s", path, info->name), 1,  opt, count + 1);
 		}
-		itmp = info;
-		info = info->next;
-		ls_infodel(itmp);
+		info = ls_infodel(info);
 	}
 	ft_strdel(&path);
-	while (info)
-	{
-		itmp = info;
-		info = info->next;
-		ls_infodel(itmp);
-	}
-}
-
-void	ls_pathdel(t_path *path)
-{
-	t_path *tmp;
-
-	while (path)
-	{
-		if (path->error == -1)
-			ft_strdel(&(path->path));
-		tmp = path;
-		path = path->next;
-		free(tmp);
-	}
 }
 
 int		main(int ac, char **av)

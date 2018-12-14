@@ -6,13 +6,13 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 16:29:32 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 19:24:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		n_blocks(t_info *info)
+int		ls_n_blocks(t_info *info)
 {
 	int		total;
 
@@ -25,7 +25,7 @@ int		n_blocks(t_info *info)
 	return (total);
 }
 
-void	print_filetype(t_info *info)
+void	ls_print_filetype(t_info *info)
 {
 	S_ISBLK(info->stat.st_mode) ? ft_putchar('b') : 0;
 	S_ISCHR(info->stat.st_mode) ? ft_putchar('c') : 0;
@@ -36,7 +36,7 @@ void	print_filetype(t_info *info)
 	S_ISREG(info->stat.st_mode) ? ft_putchar('-') : 0;
 }
 
-void	print_rights(t_info *info, char *path)
+void	ls_print_rights(t_info *info, char *path)
 {
 	char			buf[1024];
 	ssize_t			len;
