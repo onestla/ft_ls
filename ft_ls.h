@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 08:51:59 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 11:20:26 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <time.h>
 # include <errno.h>
 # include <string.h>
+
+# define SIX_MONTHS 15552000
 
 typedef struct		s_path
 {

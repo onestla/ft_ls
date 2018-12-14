@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 09:32:27 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 11:25:29 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int		ls_lnlink(t_info *info)
 
 void	ls_sprint_rest(t_info *info, char *path, char *opt)
 {
+	time_t			tme;
 	char			*tm;
 	int				count;
 	char			buf[1024];
@@ -94,6 +95,7 @@ void	ls_sprint_rest(t_info *info, char *path, char *opt)
 	else	
 		tm = ctime(&info->stat.st_mtime);
 	tm[ft_strlen(tm) - 1] = '\0';
+	tme = time(NULL);
 	if (S_ISLNK(info->stat.st_mode))
 	{
 		if ((len = readlink(ft_Sprintf("%s/%s", path, info->name), buf, sizeof(buf) - 1)) != -1)
@@ -101,6 +103,11 @@ void	ls_sprint_rest(t_info *info, char *path, char *opt)
 		info->ligne[count++] = ft_Sprintf("%.12s %s -> %s", tm + 4, info->name, buf);
 	}
 	else
-		info->ligne[count++] = ft_Sprintf("%.12s %s", tm + 4, info->name);
+	{
+		if (tme - info->stat.st_mtime > SIX_MONTHS)
+			info->ligne[count++] = ft_Sprintf("%.6s  %.4s %s", tm + 4, tm + 20, info->name);
+		else
+			info->ligne[count++] = ft_Sprintf("%.12s %s", tm + 4, info->name);
+	}
 	info->ligne[count] = NULL;
 }
