@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/14 11:43:15 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:29:32 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,20 @@ void	ls_print_date(t_info *info, char *opt, int *count)
 	else	
 		tm = ctime(&info->stat.st_mtime);
 	tm[ft_strlen(tm) - 1] = '\0';
-	if (tme - info->stat.st_mtime > SIX_MONTHS)
-		info->ligne[(*count)++] = ft_Sprintf("%.6s  %.4s", tm + 4, tm + 20);
+	if (tme - info->stat.st_mtime > SIX_MONTHS || info->stat.st_mtime > tme)
+	{
+		if (!ft_cisin(opt, 'T'))
+			info->ligne[(*count)++] = ft_Sprintf("%.6s  %.4s", tm + 4, tm + 20);
+		else
+			info->ligne[(*count)++] = ft_Sprintf("%s", tm + 4);
+	}
 	else
-		info->ligne[(*count)++] = ft_Sprintf("%.12s", tm + 4);
+	{
+		if (!ft_cisin(opt, 'T'))
+			info->ligne[(*count)++] = ft_Sprintf("%.12s", tm + 4);
+		else
+			info->ligne[(*count)++] = ft_Sprintf("%s", tm + 4);
+	}
 }
 
 void	ls_sprint_rest(t_info *info, char *path, char *opt)
@@ -98,7 +108,7 @@ void	ls_sprint_rest(t_info *info, char *path, char *opt)
 	count = 0;
 	info->ligne[count++] = ft_Sprintf("%ld", info->stat.st_nlink);
 	if (!ft_cisin(opt, 'g'))
-		info->ligne[count++] = ft_Sprintf(" %s", getpwuid(info->stat.st_uid)->pw_name);
+		info->ligne[count++] = ft_Sprintf("%s", getpwuid(info->stat.st_uid)->pw_name);
 	info->ligne[count++] = ft_Sprintf(" %s", getgrgid(info->stat.st_gid)->gr_name);
 	if (S_ISCHR(info->stat.st_mode) || S_ISBLK(info->stat.st_mode))
 		info->ligne[count++] = ft_Sprintf("%u, %3u", major(info->stat.st_rdev), minor(info->stat.st_rdev));

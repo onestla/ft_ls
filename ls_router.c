@@ -6,20 +6,22 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 11:46:42 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:46:07 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ls_print(t_info *info)
+void	ls_print(t_info *info, char *opt)
 {
 	int		count;
 	int		len;
+	int		x;
 	t_info	*tmp;
 
 	len = 0;
 	tmp = info;
+	x = (ft_cisin(opt, '1')) ? 0 : 4;
 	while (tmp)
 	{
 		if (len < (int)ft_strlen(tmp->name))
@@ -29,12 +31,14 @@ void	ls_print(t_info *info)
 	count = 0;
 	while (info)
 	{
-		if (count > 4)
+		if (count > x)
 		{
 			ft_printf("\n");
 			count = 0;
 		}
-		ft_printf("%-*s", len + 1, info->name);
+		ft_printf("%-*s", len, info->name);
+		if (info->next && !ft_cisin(opt, '1'))
+			ft_putchar(' ');
 		count++;
 		info = info->next;
 	}
@@ -103,5 +107,5 @@ void	ls_router(char *opt, t_info *info, char *path, int type)
 	if (ft_cisin(opt, 'g') || ft_cisin(opt, 'l'))
 		ls_print_l(info, path, type, opt);
 	else
-		ls_print(info);
+		ls_print(info, opt);
 }

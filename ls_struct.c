@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:16:27 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/13 20:37:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/14 16:23:38 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,8 @@ t_path	*ls_pathadd(t_path *path, char *folder)
 	if (!path)
 		return (end);
 	tmp = path;
-	while (tmp->next && (tmp->next)->error == 2)
+	while (tmp->next)
 		tmp = tmp->next;
-	if (end->error != 2)
-		while (tmp->next)
-			tmp = tmp->next;
-	end->next = tmp->next;
 	tmp->next = end;
 	return (path);
 }
@@ -46,13 +42,11 @@ t_info	*ls_infoadd(t_info *info, char *name, struct stat vstat, unsigned char ty
 	end->type = type;
 	end->stat = vstat;
 	end->next = NULL;
-	end->prev = NULL;
 	if (!info)
 		return (end);
 	tmp = info;
 	while (tmp->next)	
 		tmp = tmp->next;
-	end->prev = tmp;
 	tmp->next = end;
 	return (info);
 }
@@ -74,6 +68,21 @@ void	ls_infoswap(t_info *a, t_info *b)
 	b->name = tmpn;
 	b->type	= tmpt;
 	b->stat = tmps;
+}
+
+void	ls_pathswap(t_path *a, t_path *b)
+{
+	char		*tmpp;
+	int			tmpe;
+
+	tmpp = a->path;
+	tmpe = a->error;
+
+	a->path = b->path;
+	a->error = b->error;
+
+	b->path = tmpp;
+	b->error = tmpe;
 }
 
 int		ls_pathlen(t_path *path)
