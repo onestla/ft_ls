@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 19:24:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/15 12:42:53 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 		if (av[count][0] == '-')
 		{
 			counta = 1;
+			if (!av[count][counta])
+				path = ls_pathadd(path, av[count]);
+			if (av[count][counta] == '-')
+				counta++;
 			while (av[count][counta])
 			{
 				if (!ft_cisin("ARSTacfglrtu1", av[count][counta]))
@@ -31,7 +35,7 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 					ft_printf("usage: ls [-ARSTacfglrtu1] [file ...]\n");
 					exit(1);
 				}
-				if (!ft_cisin(opt, av[count][counta]))
+				else if (!ft_cisin(opt, av[count][counta]))
 					ft_strncat(opt, &(av[count][counta]), 1);
 				counta++;
 			}
@@ -70,9 +74,11 @@ int		main(int ac, char **av)
 	t_path		*tmp;
 	char		*opt;
 	int			count;
+	int			i;
 
 	path = NULL;
 	count = 0;
+	i = 0;
 	if (!(opt = ft_strnew(13)))
 		return (1);
 	av++;
@@ -92,8 +98,8 @@ int		main(int ac, char **av)
 	{
 		if (tmp->error == 1)
 		{
-			if (count != 0)
-				ft_printf("\n");
+			if (count > 0)
+				(i++) ? ft_printf("\n") : 0;
 			ls_ls(tmp->path, tmp->error,  opt, count++);
 		}
 		tmp = tmp->next;

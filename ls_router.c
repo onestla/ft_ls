@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 19:29:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/15 11:38:17 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 void	ls_print(t_info *info, char *opt)
 {
-	int		count;
-	int		len;
-	int		x;
-	t_info	*tmp;
+	int			count;
+	int			x;
+	size_t		mlen;
+	size_t		slen;
+	t_info		*tmp;
 
-	len = 0;
+	mlen = 0;
 	tmp = info;
 	x = (ft_cisin(opt, '1')) ? 0 : 4;
 	while (tmp)
 	{
-		if (len < (int)ft_strlen(tmp->name))
-			len = ft_strlen(tmp->name);
+		if (mlen < ft_strlen(tmp->name))
+			mlen = ft_strlen(tmp->name);
 		tmp = tmp->next;
 	}
 	count = 0;
@@ -36,7 +37,8 @@ void	ls_print(t_info *info, char *opt)
 			ft_printf("\n");
 			count = 0;
 		}
-		ft_printf("%-*s", len, info->name);
+		slen = (ft_strlen(info->name) == mlen ) ? mlen : ft_strlen(info->name);
+		ft_printf("%-*s", slen, info->name);
 		if (info->next && !ft_cisin(opt, '1'))
 			ft_putchar(' ');
 		count++;
