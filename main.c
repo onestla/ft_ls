@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 17:03:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 19:55:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ void	ls_ls(char *path, int type, char *opt, int count)
 				ft_strcmp("..", info->name))
 		{
 			ft_printf("\n");
-			ls_ls(ft_Sprintf("%s/%s", path, info->name), 1, opt, count + 1);
+			if (!ft_strcmp("/", path))
+				ls_ls(ft_Sprintf("%s%s", path, info->name), 1, opt, count + 1);
+			else
+				ls_ls(ft_Sprintf("%s/%s", path, info->name), 1, opt, count + 1);
 		}
 		info = ls_infodel(info);
 	}
