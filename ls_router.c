@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 16:42:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 18:26:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ int		*ls_infolen_l(t_info *info)
 	int		*len;
 
 	count = 0;
-	len = (int*)malloc(sizeof(int) * 9);
+	len = NULL;
+	if (!(len = (int*)malloc(sizeof(int) * 9)))
+		return (NULL);
 	tmp = info;
 	while (tmp->ligne[count + 1])
 	{
@@ -99,7 +101,8 @@ void	ls_print_l(t_info *info, char *path, int type, char *opt)
 		ls_sprint_rest(tmp, path, opt, type);
 		tmp = tmp->next;
 	}
-	len = ls_infolen_l(info);
+	if (!(len = ls_infolen_l(info)))
+		return ;
 	while (info)
 	{
 		ls_print_filetype(info);

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:16:27 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 17:41:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 18:32:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_info	*ls_infoadd(t_info *info, char *name, struct stat vstat,
 
 	if (!(end = malloc(sizeof(t_info))))
 		return (NULL);
-	end->name = ft_strdup(name);
+	if (!(end->name = ft_strdup(name)))
+		return (NULL);
 	end->type = type;
 	end->ligne[0] = NULL;
 	end->stat = vstat;
