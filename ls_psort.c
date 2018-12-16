@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:11:53 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 15:38:39 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 19:11:57 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,22 +144,4 @@ t_path		*ls_psort_size(t_path *path, int rev)
 		path = path->next;
 	}
 	return (begin);
-}
-
-t_path		*ls_psortrouter(t_path *path, char *opt)
-{
-	if (ft_cisin(opt, 'S'))
-		return (ls_psort_size(path, ft_cisin(opt, 'r')));
-	else if (ft_cisin(opt, 't'))
-	{
-		if (ft_cisin(opt, 'c'))
-			return (ls_psort_ctime(path, ft_cisin(opt, 'r')));
-		else if (ft_cisin(opt, 'u'))
-			return (ls_psort_atime(path, ft_cisin(opt, 'r')));
-		return (ls_psort_mtime(path, ft_cisin(opt, 'r')));
-	}
-	else if (ft_cisin(opt, 'f'))
-		return (path);
-	else
-		return (ls_psort_name(path, ft_cisin(opt, 'r')));
 }

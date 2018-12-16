@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 18:26:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 18:57:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,6 @@ void	ls_print_1(t_info *info)
 		ft_printf("%s", info->name);
 		info = info->next;
 	}
-}
-
-int		*ls_infolen_l(t_info *info)
-{
-	t_info	*tmp;
-	int		count;
-	int		*len;
-
-	count = 0;
-	len = NULL;
-	if (!(len = (int*)malloc(sizeof(int) * 9)))
-		return (NULL);
-	tmp = info;
-	while (tmp->ligne[count + 1])
-	{
-		len[count] = 0;
-		while (tmp)
-		{
-			if ((int)ft_strlen(tmp->ligne[count]) > len[count])
-				len[count] = ft_strlen(tmp->ligne[count]);
-			tmp = tmp->next;
-		}
-		tmp = info;
-		count++;
-	}
-	len[count] = 0;
-	return (len);
 }
 
 void	ls_print_l(t_info *info, char *path, int type, char *opt)

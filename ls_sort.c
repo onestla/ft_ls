@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_lst_sort.c                                      :+:      :+:    :+:   */
+/*   ls_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/11 17:31:40 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/16 15:41:24 by apeyret          ###   ########.fr       */
+/*   Created: 2018/12/16 19:42:35 by apeyret           #+#    #+#             */
+/*   Updated: 2018/12/16 19:42:37 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-int			ls_simple_cmp(int a, int b, char *s1, char *s2)
-{
-	if (a == b)
-		return (ft_strcmp(s1, s2) * -1);
-	return (a - b);
-}
 
 t_info		*ls_sort_atime(t_info *info, int rev)
 {
@@ -135,22 +128,4 @@ t_info		*ls_sort_size(t_info *info, int rev)
 		info = info->next;
 	}
 	return (begin);
-}
-
-t_info		*ls_sortrouter(t_info *info, char *opt)
-{
-	if (ft_cisin(opt, 'S'))
-		return (ls_sort_size(info, ft_cisin(opt, 'r')));
-	else if (ft_cisin(opt, 't'))
-	{
-		if (ft_cisin(opt, 'c'))
-			return (ls_sort_ctime(info, ft_cisin(opt, 'r')));
-		else if (ft_cisin(opt, 'u'))
-			return (ls_sort_atime(info, ft_cisin(opt, 'r')));
-		return (ls_sort_mtime(info, ft_cisin(opt, 'r')));
-	}
-	else if (ft_cisin(opt, 'f'))
-		return (info);
-	else
-		return (ls_sort_name(info, ft_cisin(opt, 'r')));
 }

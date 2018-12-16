@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 16:22:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 19:27:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,39 @@ typedef struct		s_info
 	struct s_info	*prev;
 }					t_info;
 
-t_path				*ls_pathadd(t_path *path, char *folder);
-t_info				*ls_infoadd(t_info *info, char *name, struct stat stat, unsigned char type);
 void				ls_router(char *opt, t_info *info, char *path, int type);
 void				ls_print_filetype(t_info *info);
-void				ls_print_rights(t_info *info, char *path);
-void				ls_sprint_rest(t_info *info, char *path, char *opt, int type);
-t_info				*ls_sort_mtime(t_info *info, int rev);
-t_info				*ls_sort_name(t_info *info, int rev);
-t_info				*ls_sort_size(t_info *info, int rev);
-int					ls_n_blocks(t_info *info);
-void				ls_infoswap(t_info *a, t_info *b);
-t_info				*ls_sortrouter(t_info *info, char *opt);
-int					ls_pathlen(t_path *path);
-int					ls_fcheck(char *path);
-t_info				*ls_frouter(char *path, char *opt, int type);
-t_path				*ls_psortrouter(t_path *path, char *opt);
 void				ls_pathswap(t_path *a, t_path *b);
 int					ls_simple_cmp(int a, int b, char *s1, char *s2);
+void				ls_print_rights(t_info *info, char *path);
+void				ls_sprint_rest(t_info *info, char *path, char *opt,
+					int type);
+int					ls_n_blocks(t_info *info);
+void				ls_infoswap(t_info *a, t_info *b);
+int					ls_pathlen(t_path *path);
+
+t_info				*ls_frouter(char *path, char *opt, int type);
+int					ls_fcheck(char *path);
+t_path				*ls_pathadd(t_path *path, char *folder);
+t_info				*ls_infoadd(t_info *info, char *name, struct stat stat,
+					unsigned char type);
+
 t_info				*ls_infodel(t_info *info);
 void				ls_infosdel(t_info *info);
 void				ls_pathdel(t_path *path);
+
+t_info				*ls_sort_atime(t_info *info, int rev);
+t_info				*ls_sort_ctime(t_info *info, int rev);
+t_info				*ls_sort_mtime(t_info *info, int rev);
+t_info				*ls_sort_name(t_info *info, int rev);
+t_info				*ls_sort_size(t_info *info, int rev);
+t_path				*ls_psort_atime(t_path *path, int rev);
+t_path				*ls_psort_ctime(t_path *path, int rev);
+t_path				*ls_psort_mtime(t_path *path, int rev);
+t_path				*ls_psort_name(t_path *path, int rev);
+t_path				*ls_psort_size(t_path *path, int rev);
+t_info				*ls_sortrouter(t_info *info, char *opt);
+t_path				*ls_psortrouter(t_path *path, char *opt);
+int					*ls_infolen_l(t_info *info);
 
 #endif

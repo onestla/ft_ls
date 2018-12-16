@@ -6,20 +6,23 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2018/12/14 20:13:10 by apeyret          ###   ########.fr        #
+#    Updated: 2018/12/16 19:27:48 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls 
 
-SRC = main.c \
-	  ls_struct.c \
-	  ls_files.c \
-	  ls_router.c \
-	  ls_utils.c \
-	  ls_del.c \
-	  ls_sort.c \
-	  ls_psort.c
+SRC =	ls_check.c \
+		ls_del.c \
+		ls_files.c \
+		ls_optl.c \
+		ls_optl01.c \
+		ls_psort.c \
+		ls_router.c \
+		ls_rsort.c \
+		ls_sort.c \
+		ls_struct.c \
+		main.c
 
 CC = gcc
 

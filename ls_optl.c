@@ -6,24 +6,11 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/16 16:21:38 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 18:58:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-int		ls_n_blocks(t_info *info)
-{
-	int		total;
-
-	total = 0;
-	while (info)
-	{
-		total += info->stat.st_blocks;
-		info = info->next;
-	}
-	return (total);
-}
 
 void	ls_print_filetype(t_info *info)
 {
@@ -55,20 +42,6 @@ void	ls_print_rights(t_info *info, char *path)
 		ft_putchar('@');
 	else
 		ft_putchar(' ');
-}
-
-int		ls_lnlink(t_info *info)
-{
-	int len;
-
-	len = 0;
-	while (info)
-	{
-		if (len < info->stat.st_nlink)
-			len = info->stat.st_nlink;
-		info = info->next;
-	}
-	return (ft_intlen(len));
 }
 
 void	ls_print_date(t_info *info, char *opt, int *count)
