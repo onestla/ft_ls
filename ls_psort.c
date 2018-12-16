@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:11:53 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 19:29:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 15:38:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_path		*ls_psort_atime(t_path *path, int rev)
 {
-	t_path	*begin;
-	t_path	*tmp;
-	struct	stat tstat;
-	struct	stat pstat;
+	t_path		*begin;
+	t_path		*tmp;
+	struct stat	tstat;
+	struct stat	pstat;
 
 	tmp = NULL;
 	begin = path;
@@ -28,9 +28,11 @@ t_path		*ls_psort_atime(t_path *path, int rev)
 		{
 			lstat(path->path, &pstat);
 			lstat(tmp->path, &tstat);
-			if ((ls_simple_cmp(pstat.st_atime, tstat.st_atime, path->path, tmp->path) < 0 && !rev) || 
-					(ls_simple_cmp(pstat.st_atime, tstat.st_atime, path->path, tmp->path) > 0 && rev))
-				ls_pathswap(path, tmp); 
+			if ((ls_simple_cmp(pstat.st_atime, tstat.st_atime, path->path,
+						tmp->path) < 0 && !rev) ||
+					(ls_simple_cmp(pstat.st_atime, tstat.st_atime, path->path,
+						tmp->path) > 0 && rev))
+				ls_pathswap(path, tmp);
 			tmp = tmp->next;
 		}
 		path = path->next;
@@ -40,10 +42,10 @@ t_path		*ls_psort_atime(t_path *path, int rev)
 
 t_path		*ls_psort_ctime(t_path *path, int rev)
 {
-	t_path	*begin;
-	t_path	*tmp;
-	struct	stat tstat;
-	struct	stat pstat;
+	t_path		*begin;
+	t_path		*tmp;
+	struct stat	tstat;
+	struct stat	pstat;
 
 	tmp = NULL;
 	begin = path;
@@ -54,9 +56,11 @@ t_path		*ls_psort_ctime(t_path *path, int rev)
 		{
 			lstat(path->path, &pstat);
 			lstat(tmp->path, &tstat);
-			if ((ls_simple_cmp(pstat.st_ctime, tstat.st_ctime, path->path, tmp->path) < 0 && !rev) || 
-					(ls_simple_cmp(pstat.st_ctime, tstat.st_ctime, path->path, tmp->path) > 0 && rev))
-				ls_pathswap(path, tmp); 
+			if ((ls_simple_cmp(pstat.st_ctime, tstat.st_ctime, path->path,
+						tmp->path) < 0 && !rev) ||
+					(ls_simple_cmp(pstat.st_ctime, tstat.st_ctime, path->path,
+						tmp->path) > 0 && rev))
+				ls_pathswap(path, tmp);
 			tmp = tmp->next;
 		}
 		path = path->next;
@@ -66,10 +70,10 @@ t_path		*ls_psort_ctime(t_path *path, int rev)
 
 t_path		*ls_psort_mtime(t_path *path, int rev)
 {
-	t_path	*begin;
-	t_path	*tmp;
-	struct	stat tstat;
-	struct	stat pstat;
+	t_path		*begin;
+	t_path		*tmp;
+	struct stat tstat;
+	struct stat pstat;
 
 	tmp = NULL;
 	begin = path;
@@ -80,9 +84,11 @@ t_path		*ls_psort_mtime(t_path *path, int rev)
 		{
 			lstat(path->path, &pstat);
 			lstat(tmp->path, &tstat);
-			if ((ls_simple_cmp(pstat.st_mtime, tstat.st_mtime, path->path, tmp->path) < 0 && !rev) || 
-					(ls_simple_cmp(pstat.st_mtime, tstat.st_mtime, path->path, tmp->path) > 0 && rev))
-				ls_pathswap(path, tmp); 
+			if ((ls_simple_cmp(pstat.st_mtime, tstat.st_mtime, path->path,
+						tmp->path) < 0 && !rev) ||
+					(ls_simple_cmp(pstat.st_mtime, tstat.st_mtime, path->path,
+						tmp->path) > 0 && rev))
+				ls_pathswap(path, tmp);
 			tmp = tmp->next;
 		}
 		path = path->next;
@@ -102,7 +108,8 @@ t_path		*ls_psort_name(t_path *path, int rev)
 		tmp = path->next;
 		while (tmp)
 		{
-			if ((ft_strcmp(path->path, tmp->path) > 0 && !rev) || (ft_strcmp(path->path, tmp->path) < 0 && rev))  
+			if ((ft_strcmp(path->path, tmp->path) > 0 && !rev) ||
+				(ft_strcmp(path->path, tmp->path) < 0 && rev))
 				ls_pathswap(path, tmp);
 			tmp = tmp->next;
 		}
@@ -113,10 +120,10 @@ t_path		*ls_psort_name(t_path *path, int rev)
 
 t_path		*ls_psort_size(t_path *path, int rev)
 {
-	t_path	*begin;
-	t_path	*tmp;
-	struct	stat tstat;
-	struct	stat pstat;
+	t_path		*begin;
+	t_path		*tmp;
+	struct stat tstat;
+	struct stat pstat;
 
 	tmp = NULL;
 	begin = path;
@@ -127,9 +134,11 @@ t_path		*ls_psort_size(t_path *path, int rev)
 		{
 			lstat(path->path, &pstat);
 			lstat(tmp->path, &tstat);
-			if ((ls_simple_cmp(pstat.st_size, tstat.st_size, path->path, tmp->path) < 0 && !rev) || 
-					(ls_simple_cmp(pstat.st_size, tstat.st_size, path->path, tmp->path) > 0 && rev))
-				ls_pathswap(path, tmp); 
+			if ((ls_simple_cmp(pstat.st_size, tstat.st_size, path->path,
+						tmp->path) < 0 && !rev) ||
+					(ls_simple_cmp(pstat.st_size, tstat.st_size, path->path,
+						tmp->path) > 0 && rev))
+				ls_pathswap(path, tmp);
 			tmp = tmp->next;
 		}
 		path = path->next;

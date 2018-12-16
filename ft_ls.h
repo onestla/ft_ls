@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/14 19:26:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/16 16:22:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_info				*ls_infoadd(t_info *info, char *name, struct stat stat, unsigned char 
 void				ls_router(char *opt, t_info *info, char *path, int type);
 void				ls_print_filetype(t_info *info);
 void				ls_print_rights(t_info *info, char *path);
-void				ls_sprint_rest(t_info *info, char *path, char *opt);
+void				ls_sprint_rest(t_info *info, char *path, char *opt, int type);
 t_info				*ls_sort_mtime(t_info *info, int rev);
 t_info				*ls_sort_name(t_info *info, int rev);
 t_info				*ls_sort_size(t_info *info, int rev);
