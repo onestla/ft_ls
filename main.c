@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/17 19:12:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/17 19:40:07 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 	while (count < ac)
 	{
 		if (!ft_strcmp(av[count], "--"))
+		{
+			count++;
 			break ;
+		}
 		else if (av[count][0] == '-')
 			ls_optt(av[0], av[count], opt);
 		else

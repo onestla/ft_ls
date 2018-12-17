@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/17 11:09:34 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/17 19:54:16 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,6 @@ int		ls_infolen(t_info *info)
 		info = info->next;
 	}
 	return (mlen);
-}
-
-void	ls_print(t_info *info)
-{
-	int			count;
-	size_t		mlen;
-
-	count = 0;
-	mlen = ls_infolen(info);
-	while (info)
-	{
-		if (count > 4)
-		{
-			ft_printf("\n");
-			count = 0;
-		}
-		if (!info->next)
-			ft_printf("%s", info->name);
-		else
-			ft_printf("%-*s", mlen + 1, info->name);
-		count++;
-		info = info->next;
-	}
-	ft_printf("\n");
 }
 
 void	ls_print_1(t_info *info)
@@ -94,8 +70,6 @@ void	ls_router(char *opt, t_info *info, char *path, int type)
 		return ;
 	if (ft_cisin(opt, 'g') || ft_cisin(opt, 'l'))
 		ls_print_l(info, path, type, opt);
-	else if (ft_cisin(opt, '1'))
-		ls_print_1(info);
 	else
-		ls_print(info);
+		ls_print_1(info);
 }
