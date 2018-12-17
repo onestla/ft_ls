@@ -6,13 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/17 18:53:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/17 19:07:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ls_optt(char *s, char *opt)
+void	ls_optt(char *exec, char *s, char *opt)
 {
 	int count;
 
@@ -21,7 +21,7 @@ void	ls_optt(char *s, char *opt)
 	{
 		if (!ft_cisin("ARSTacfglrtu1", s[count]))
 		{
-			ft_printf("ls: illegal option -- %c\n", s[count]);
+			ft_printf("%s: illegal option -- %c\n", exec, s[count]);
 			ft_exit("usage: ls [-ARSTacfglrtu1] [file ...]", 1);
 		}
 		else if (!ft_cisin(opt, s[count]))
@@ -34,13 +34,13 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 {
 	int			count;
 
-	count = 0;
-	while (count < ac - 1)
+	count = 1;
+	while (count < ac)
 	{
 		if (!ft_strcmp(av[count], "--"))
 			break ;
 		else if (av[count][0] == '-')
-			ls_optt(av[count], opt);
+			ls_optt(av[0], av[count], opt);
 		else
 			break ;
 		count++;
@@ -115,7 +115,6 @@ int		main(int ac, char **av)
 	path = NULL;
 	if (!(opt = ft_strnew(13)))
 		return (1);
-	av++;
 	if (!(path = ls_options(ac, av, path, opt)))
 		path = ls_pathadd(path, ".");
 	path = ls_psortrouter(path, opt);
