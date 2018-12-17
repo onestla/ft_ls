@@ -6,42 +6,48 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/17 17:41:40 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/17 18:53:11 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ls_illegalopt(char illegal)
+void	ls_optt(char *s, char *opt)
 {
-	ft_printf("ls: illegal option -- %c\n", illegal);
-	ft_exit("usage: ls [-ARSTacfglrtu1] [file ...]", 1);
+	int count;
+
+	count = 1;
+	while (s[count])
+	{
+		if (!ft_cisin("ARSTacfglrtu1", s[count]))
+		{
+			ft_printf("ls: illegal option -- %c\n", s[count]);
+			ft_exit("usage: ls [-ARSTacfglrtu1] [file ...]", 1);
+		}
+		else if (!ft_cisin(opt, s[count]))
+			ft_strncat(opt, &(s[count]), 1);
+		count++;
+	}
 }
 
 t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 {
 	int			count;
-	int			counta;
 
 	count = 0;
 	while (count < ac - 1)
 	{
-		if (av[count][0] == '-')
-		{
-			counta = 1;
-			if (!av[count][counta])
-				path = ls_pathadd(path, av[count]);
-			while (av[count][counta])
-			{
-				if (!ft_cisin("ARSTacfglrtu1", av[count][counta]))
-					ls_illegalopt(av[count][counta]);
-				else if (!ft_cisin(opt, av[count][counta]))
-					ft_strncat(opt, &(av[count][counta]), 1);
-				counta++;
-			}
-		}
+		if (!ft_strcmp(av[count], "--"))
+			break ;
+		else if (av[count][0] == '-')
+			ls_optt(av[count], opt);
 		else
-			path = ls_pathadd(path, av[count]);
+			break ;
+		count++;
+	}
+	while (count < ac - 1)
+	{
+		path = ls_pathadd(path, av[count]);
 		count++;
 	}
 	return (path);
