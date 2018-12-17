@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/17 12:10:06 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:15:32 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,24 @@ void	ls_print_rights(t_info *info, char *path)
 
 	ft_putchar((info->stat.st_mode & S_IRUSR) ? 'r' : '-');
 	ft_putchar((info->stat.st_mode & S_IWUSR) ? 'w' : '-');
-	ft_putchar((info->stat.st_mode & S_IXUSR) ? 'x' : '-');
+	if (info->stat.st_mode & S_ISUID)
+		ft_putchar((info->stat.st_mode & S_IXUSR) ? 's' : 'S');
+	else
+		ft_putchar((info->stat.st_mode & S_IXUSR) ? 'x' : '-');
 	ft_putchar((info->stat.st_mode & S_IRGRP) ? 'r' : '-');
 	ft_putchar((info->stat.st_mode & S_IWGRP) ? 'w' : '-');
-	ft_putchar((info->stat.st_mode & S_IXGRP) ? 'x' : '-');
+	if (info->stat.st_mode & S_ISGID)
+		ft_putchar((info->stat.st_mode & S_IXGRP) ? 's' : 'S');
+	else
+		ft_putchar((info->stat.st_mode & S_IXGRP) ? 'x' : '-');
 	ft_putchar((info->stat.st_mode & S_IROTH) ? 'r' : '-');
 	ft_putchar((info->stat.st_mode & S_IWOTH) ? 'w' : '-');
-	ft_putchar((info->stat.st_mode & S_IXOTH) ? 'x' : '-');
-	if ((len = listxattr(ft_zprintf("%s/%s", path, info->name), buf,
-		sizeof(buf) - 1, 0)) > 0)
-		ft_putchar('@');
+	if (info->stat.st_mode & S_ISVTX)
+		ft_putchar((info->stat.st_mode & S_IXOTH) ? 't' : 'T');
 	else
-		ft_putchar(' ');
+		ft_putchar((info->stat.st_mode & S_IXOTH) ? 'x' : '-');
+	ft_putchar(((len = listxattr(ft_zprintf("%s/%s", path, info->name), buf,
+		sizeof(buf) - 1, 0)) > 0) ? '@' : ' ');
 }
 
 void	ls_print_date(t_info *info, char *opt, int *count)
