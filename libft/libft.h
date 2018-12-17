@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 13:41:32 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/12 19:25:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/17 12:07:41 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char				*ft_strlower(char *s);
 int					ft_cisin(char *s, char c);
 int					ft_printf(const char *s, ...);
 int					ft_dprintf(int fd, const char *format, ...);
-char				*ft_Sprintf(const char *format, ...);
+char				*ft_zprintf(const char *format, ...);
 int					ft_atoi_base(char *s, int base);
 int					ft_ncisin(char *s, char c, int n);
 

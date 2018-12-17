@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 18:28:55 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/12 19:43:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/17 12:06:40 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		ft_dprintf(int fd, const char *format, ...)
 	return (len);
 }
 
-char	*ft_Sprintf(const char *format, ...)
+char	*ft_zprintf(const char *format, ...)
 {
 	t_printf	*lst;
 	char		*s;

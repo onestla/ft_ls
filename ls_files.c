@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:50:04 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/16 18:55:58 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/17 12:09:15 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_info		*ls_folderin(DIR *ptr, char *path, char *opt)
 		if (ft_cisin(opt, 'A') && (!ft_strcmp("..", ret->d_name) ||
 				!ft_strcmp(".", ret->d_name)))
 			continue;
-		cpath = ft_Sprintf("%s/%s", path, ret->d_name);
+		cpath = ft_zprintf("%s/%s", path, ret->d_name);
 		lstat(cpath, &vstat);
 		info = ls_infoadd(info, ret->d_name, vstat, ret->d_type);
 		ft_strdel(&cpath);

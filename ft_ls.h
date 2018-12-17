@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 19:27:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/17 12:02:11 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ typedef struct		s_info
 	char			*name;
 	unsigned char	type;
 	struct stat		stat;
-	
 	char			*ligne[9];
 	int				len[8];
-
 	struct s_info	*next;
 	struct s_info	*prev;
 }					t_info;
