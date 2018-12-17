@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/17 12:10:18 by glavigno         ###   ########.fr       */
+/*   Updated: 2018/12/17 14:48:55 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ls_main(t_path *path, char *opt)
 	{
 		if (tmp->error == 2)
 			ls_ls(tmp->path, tmp->error, opt, count++);
+		if (tmp->error == 2)
+			i++;
 		tmp = tmp->next;
 	}
 	count = ls_pathlen(path) - 1;
@@ -94,8 +96,8 @@ void	ls_main(t_path *path, char *opt)
 	{
 		if (tmp->error == 1)
 		{
-			if (count > 0)
-				(i++) ? ft_printf("\n") : 0;
+			if (count > 0 && i)
+				ft_printf("\n");
 			ls_ls(tmp->path, tmp->error, opt, count++);
 		}
 		tmp = tmp->next;
