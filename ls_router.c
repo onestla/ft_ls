@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 22:15:28 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 18:57:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/17 11:09:34 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ls_print_1(t_info *info)
 {
 	while (info)
 	{
-		ft_printf("%s", info->name);
+		ft_printf("%s\n", info->name);
 		info = info->next;
 	}
 }
