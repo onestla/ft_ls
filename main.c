@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/17 19:07:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/17 19:12:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 			break ;
 		count++;
 	}
-	while (count < ac - 1)
+	while (count < ac)
 	{
 		path = ls_pathadd(path, av[count]);
 		count++;
