@@ -6,20 +6,20 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:16:27 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 18:32:10 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/01/02 15:24:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_path	*ls_pathadd(t_path *path, char *folder)
+t_path	*ls_pathadd(t_path *path, char *folder, char *opt)
 {
 	t_path *end;
 	t_path *tmp;
 
 	if (!(end = malloc(sizeof(t_path))))
 		return (NULL);
-	end->error = ls_fcheck(folder);
+	end->error = ls_fcheck(folder, opt);
 	end->path = ft_strdup(folder);
 	end->next = NULL;
 	if (!path)

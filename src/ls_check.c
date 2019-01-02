@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 18:56:13 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 19:16:30 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/01/02 16:14:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,21 @@ int			ls_isfolder(char *path)
 	return (1);
 }
 
-int			ls_fcheck(char *path)
+int			ls_fcheck(char *path, char *opt)
 {
-	int ret;
+	int			ret;
+	struct stat stt;
 
 	ret = 0;
 	if ((ret = ls_isfolder(path)) != 0)
+	{
+		if (ret != 2 && ft_cisin(opt, 'l') && path[ft_strlen(path) - 1] != '/')
+		{
+			lstat(path, &stt);
+			if (S_ISLNK(stt.st_mode))
+				return (2);	
+		}
 		return (ret);
+	}
 	return (2);
 }
