@@ -6,27 +6,27 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2018/12/16 19:27:48 by apeyret          ###   ########.fr        #
+#    Updated: 2019/01/02 15:11:49 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls 
 
-SRC =	ls_check.c \
-		ls_del.c \
-		ls_files.c \
-		ls_optl.c \
-		ls_optl01.c \
-		ls_psort.c \
-		ls_router.c \
-		ls_rsort.c \
-		ls_sort.c \
-		ls_struct.c \
-		main.c
+SRC =	src/ls_check.c \
+		src/ls_del.c \
+		src/ls_files.c \
+		src/ls_optl.c \
+		src/ls_optl01.c \
+		src/ls_psort.c \
+		src/ls_router.c \
+		src/ls_rsort.c \
+		src/ls_sort.c \
+		src/ls_struct.c \
+		src/main.c
 
 CC = gcc
 
-CFLAGS = -I . -I libft/ -Wall -Werror -Wextra 
+CFLAGS = -I include/ -I libft/ -Wall -Werror -Wextra 
 
 DEBUG= #-g3 -fsanitize=address
 
