@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 18:38:33 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/17 22:53:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/01/02 16:14:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_path	*ls_options(int ac, char **av, t_path *path, char *opt)
 	}
 	while (count < ac)
 	{
-		path = ls_pathadd(path, av[count]);
+		path = ls_pathadd(path, av[count], opt);
 		count++;
 	}
 	return (path);
@@ -120,7 +120,7 @@ int		main(int ac, char **av)
 	if (!(opt = ft_strnew(13)))
 		return (1);
 	if (!(path = ls_options(ac, av, path, opt)))
-		path = ls_pathadd(path, ".");
+		path = ls_pathadd(path, ".", opt);
 	path = ls_psortrouter(path, opt);
 	ls_main(path, opt);
 	ls_pathdel(path);
