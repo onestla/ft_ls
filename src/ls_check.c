@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 18:56:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/01/02 16:14:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/01/03 15:09:11 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			ls_fcheck(char *path, char *opt)
 		{
 			lstat(path, &stt);
 			if (S_ISLNK(stt.st_mode))
-				return (2);	
+				return (2);
 		}
 		return (ret);
 	}

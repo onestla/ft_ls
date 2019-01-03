@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2018/12/17 17:15:32 by glavigno         ###   ########.fr       */
+/*   Updated: 2019/01/03 15:10:56 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ls_print_filetype(t_info *info)
 void	ls_print_rights(t_info *info, char *path)
 {
 	char			buf[1024];
-	ssize_t			len;
+	char			*t;
+	ssize_t			l;
 
 	ft_putchar((info->stat.st_mode & S_IRUSR) ? 'r' : '-');
 	ft_putchar((info->stat.st_mode & S_IWUSR) ? 'w' : '-');
@@ -46,8 +47,9 @@ void	ls_print_rights(t_info *info, char *path)
 		ft_putchar((info->stat.st_mode & S_IXOTH) ? 't' : 'T');
 	else
 		ft_putchar((info->stat.st_mode & S_IXOTH) ? 'x' : '-');
-	ft_putchar(((len = listxattr(ft_zprintf("%s/%s", path, info->name), buf,
-		sizeof(buf) - 1, 0)) > 0) ? '@' : ' ');
+	t = ft_zprintf("%s/%s", path, info->name);
+	ft_putchar(((l = listxattr(t, buf, sizeof(buf) - 1, 0)) > 0) ? '@' : ' ');
+	ft_strdel(&t);
 }
 
 void	ls_print_date(t_info *info, char *opt, int *count)
