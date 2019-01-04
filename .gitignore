@@ -1,6 +1,6 @@
-**.o
-**.a
-**.gch
-**.swp
-**a.out
-ft_ls
+*
+!**.c
+!**.h
+!**Makefile
+!**,pdf
+!**.sh
