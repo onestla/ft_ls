@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:26:46 by glavigno          #+#    #+#             */
-/*   Updated: 2019/01/03 15:10:56 by glavigno         ###   ########.fr       */
+/*   Updated: 2019/01/04 17:08:17 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ls_print_date(t_info *info, char *opt, int *count)
 	else
 		tm = ctime(&info->stat.st_mtime);
 	tm[ft_strlen(tm) - 1] = '\0';
-	if (tme - info->stat.st_mtime > SIX_MONTHS || info->stat.st_mtime > tme)
+	if (get_diff(tme, opt, info) > SIX_MONTHS || get_diff(tme, opt, info) > tme)
 	{
 		if (!ft_cisin(opt, 'T'))
 			info->ligne[(*count)++] = ft_zprintf("%.6s  %.4s", tm + 4, tm + 20);

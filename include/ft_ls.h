@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 19:04:14 by apeyret           #+#    #+#             */
-/*   Updated: 2019/01/02 15:24:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/01/04 17:04:55 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void				ls_sprint_rest(t_info *info, char *path, char *opt,
 int					ls_n_blocks(t_info *info);
 void				ls_infoswap(t_info *a, t_info *b);
 int					ls_pathlen(t_path *path);
+time_t				get_diff(time_t t, char *opt, t_info *info);
 
 t_info				*ls_frouter(char *path, char *opt, int type);
 int					ls_fcheck(char *path, char *opt);

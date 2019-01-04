@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 18:57:22 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/16 19:16:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/01/04 17:08:42 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,27 @@ int		ls_lnlink(t_info *info)
 		info = info->next;
 	}
 	return (ft_intlen(len));
+}
+
+time_t	get_diff(time_t t, char *opt, t_info *info)
+{
+	time_t	tmp;
+	char	*tm;
+
+	if (ft_cisin(opt, 'u'))
+	{
+		tm = ctime(&info->stat.st_atime);
+		tmp = info->stat.st_atime;
+	}
+	else if (ft_cisin(opt, 'c'))
+	{
+		tm = ctime(&info->stat.st_ctime);
+		tmp = info->stat.st_ctime;
+	}
+	else
+	{
+		tm = ctime(&info->stat.st_mtime);
+		tmp = info->stat.st_mtime;
+	}
+	return (t - tmp);
 }
