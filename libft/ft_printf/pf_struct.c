@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 16:14:21 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/09 17:01:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/01/04 14:02:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_printf		*pf_prnew(char *str, int needconv)
 	lst->needconv = needconv;
 	lst->settings[0] = '\0';
 	lst->size[0] = '\0';
+	lst->size[1] = '\0';
 	lst->type = '\0';
 	lst->len = 0;
 	lst->pre[0] = 0;
